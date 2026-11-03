@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Odisha 360 - Your complete travel companion for exploring Odisha destinations, heritage, culture, and unforgettable journeys." />
+  <meta name="keywords" content="Odisha tourism, Konark, Puri, Chilika Lake, Bhubaneswar, travel India" />
+  <title>Odisha 360 | Experience the Magic of Odisha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#174C35" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="nav-logo-link">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="#D5A746" stroke-width="2"/>
+            <path d="M8 16 Q16 6 24 16 Q16 26 8 16Z" fill="#D5A746" opacity="0.8"/>
+            <circle cx="16" cy="16" r="3" fill="#D5A746"/>
+          </svg>
+        </div>
+        <span class="logo-text">Odisha <span class="logo-accent">360</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home" class="nav-link active" id="nav-home">Home</a></li>
+        <li><a href="#destinations" class="nav-link" id="nav-explore">Explore</a></li>
+        <li><a href="#trip-planner" class="nav-link" id="nav-trip">Trip Planner</a></li>
+        <li><a href="#culture" class="nav-link" id="nav-culture">Culture</a></li>
+        <li><a href="#about" class="nav-link" id="nav-about">About</a></li>
+        <li><a href="#contact" class="nav-link" id="nav-contact">Contact</a></li>
+      </ul>
+      <a href="#destinations" class="btn btn-nav" id="btn-explore-now">Explore Now</a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+    <div class="mobile-nav" id="mobile-nav">
+      <button class="mobile-nav-close" id="mobile-nav-close">&#10005;</button>
+      <div class="mobile-logo"><span class="logo-text">Odisha <span class="logo-accent">360</span></span></div>
+      <ul class="mobile-nav-links">
+        <li><a href="#home" class="mobile-nav-link" id="m-nav-home">Home</a></li>
+        <li><a href="#destinations" class="mobile-nav-link" id="m-nav-explore">Explore</a></li>
+        <li><a href="#trip-planner" class="mobile-nav-link" id="m-nav-trip">Trip Planner</a></li>
+        <li><a href="#culture" class="mobile-nav-link" id="m-nav-culture">Culture</a></li>
+        <li><a href="#about" class="mobile-nav-link" id="m-nav-about">About</a></li>
+        <li><a href="#contact" class="mobile-nav-link" id="m-nav-contact">Contact</a></li>
+      </ul>
+      <a href="#destinations" class="btn btn-primary mobile-cta" id="m-btn-explore">Explore Now</a>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="assets/images/hero.jpg" alt="Aerial view of Konark Sun Temple with Bay of Bengal" class="hero-img" id="hero-bg-img" />
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="particles" id="particles-container" aria-hidden="true">
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+      <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+    <div class="hero-content" id="hero-content">
+      <div class="hero-badge" id="hero-badge">
+        <span class="badge-dot"></span><span>Incredible Odisha</span>
+      </div>
+      <h1 class="hero-title" id="hero-title">
+        Experience the<br /><span class="hero-title-accent">Magic of Odisha</span>
+      </h1>
+      <p class="hero-subtitle" id="hero-subtitle">
+        Discover beautiful destinations, ancient heritage, local culture and unforgettable journeys.<br />Your complete Odisha travel companion starts here.
+      </p>
+      <div class="hero-cta" id="hero-cta-buttons">
+        <a href="#destinations" class="btn btn-primary" id="btn-hero-destinations">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Explore Destinations
+        </a>
+        <a href="#trip-planner" class="btn btn-outline" id="btn-hero-planner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Plan Your Journey
+        </a>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="30">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Districts</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="480">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Destinations</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="1500">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Temples</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="450">0</span><span class="stat-suffix">km</span></div><span class="stat-label">Coastline</span></div>
+      </div>
+    </div>
+    <div class="scroll-indicator" id="scroll-indicator">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH SECTION -->
+  <section class="search-section" id="search-section">
+    <div class="container">
+      <div class="search-card" id="search-card">
+        <div class="search-tabs" id="search-tabs">
+          <button class="search-tab active" id="tab-destinations" data-tab="destinations">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Destinations
+          </button>
+          <button class="search-tab" id="tab-hotels" data-tab="hotels">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+            Hotels
+          </button>
+          <button class="search-tab" id="tab-experiences" data-tab="experiences">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+            Experiences
+          </button>
+        </div>
+        <form class="search-form" id="search-form" onsubmit="handleSearch(event)">
+          <div class="search-field" id="search-field-where">
+            <label for="search-where" class="search-label">Where</label>
+            <input type="text" id="search-where" class="search-input" placeholder="Where do you want to go?" autocomplete="off" />
+            <div class="search-suggestions" id="search-suggestions"></div>
+          </div>
+          <div class="search-divider-v"></div>
+          <div class="search-field" id="search-field-when">
+            <label for="search-when" class="search-label">When</label>
+            <input type="date" id="search-when" class="search-input" />
+          </div>
+          <div class="search-divider-v"></div>
+          <div class="search-field" id="search-field-travellers">
+            <label for="search-travellers" class="search-label">Travellers</label>
+            <select id="search-travellers" class="search-input search-select">
+              <option value="1">1 Traveller</option>
+              <option value="2" selected>2 Travellers</option>
+              <option value="3">3 Travellers</option>
+              <option value="4">4 Travellers</option>
+              <option value="5">5+ Travellers</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-search" id="btn-search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINATIONS -->
+  <section class="destinations-section" id="destinations">
+    <div class="container">
+      <div class="section-header" id="destinations-header">
+        <div class="section-tag">Top Picks</div>
+        <h2 class="section-title">Popular Destinations</h2>
+        <p class="section-subtitle">From ancient temples to pristine beaches, explore Odisha's most breathtaking places</p>
+      </div>
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" id="filter-all" data-filter="all">All</button>
+        <button class="filter-btn" id="filter-heritage" data-filter="heritage">Heritage</button>
+        <button class="filter-btn" id="filter-nature" data-filter="nature">Nature</button>
+        <button class="filter-btn" id="filter-beach" data-filter="beach">Beaches</button>
+        <button class="filter-btn" id="filter-spiritual" data-filter="spiritual">Spiritual</button>
+        <button class="filter-btn" id="filter-wildlife" data-filter="wildlife">Wildlife</button>
+      </div>
+      <div class="destinations-grid" id="destinations-grid">
+
+        <div class="dest-card" id="card-konark" data-category="heritage">
+          <div class="dest-card-img-wrap">
+            <img src="assets/images/konark.jpg" alt="Konark Sun Temple" class="dest-card-img" loading="lazy" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">UNESCO Heritage</div>
+            <button class="dest-card-fav" id="fav-konark" aria-label="Save Konark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Puri District</span>
+              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.9</span>
+            </div>
+            <h3 class="dest-card-title">Konark Sun Temple</h3>
+            <p class="dest-card-desc">Marvel at the 13th century chariot-shaped temple, a masterpiece of Kalinga architecture and UNESCO World Heritage Site.</p>
+            <div class="dest-card-footer"><span class="dest-card-tag">Heritage</span><a href="#" class="dest-card-link" id="link-konark">Explore &rarr;</a></div>
+          </div>
+        </div>
+
+        <div class="dest-card" id="card-puri" data-category="beach spiritual">
+          <div class="dest-card-img-wrap">
+            <img src="assets/images/puri.jpg" alt="Puri Beach" class="dest-card-img" loading="lazy" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Sacred City</div>
+            <button class="dest-card-fav" id="fav-puri" aria-label="Save Puri"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Puri District</span>
+              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.8</span>
+            </div>
+            <h3 class="dest-card-title">Puri &ndash; Sea &amp; Soul</h3>
+            <p class="dest-card-desc">Golden sands meet divine spirituality at the abode of Lord Jagannath. A sacred pilgrimage and glorious beach destination in one.</p>
+            <div class="dest-card-footer"><span class="dest-card-tag">Beach &amp; Spiritual</span><a href="#" class="dest-card-link" id="link-puri">Explore &rarr;</a></div>
+          </div>
+        </div>
+
+        <div class="dest-card" id="card-chilika" data-category="nature wildlife">
+          <div class="dest-card-img-wrap">
+            <img src="assets/images/chilika.jpg" alt="Chilika Lake" class="dest-card-img" loading="lazy" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Ramsar Site</div>
+            <button class="dest-card-fav" id="fav-chilika" aria-label="Save Chilika"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Khurda &amp; Puri</span>
+              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.7</span>
+            </div>
+            <h3 class="dest-card-title">Chilika Lake</h3>
+            <p class="dest-card-desc">Asia's largest brackish water lagoon, home to rare Irrawaddy dolphins, migratory flamingos, and thousands of avian species.</p>
+            <div class="dest-card-footer"><span class="dest-card-tag">Nature &amp; Wildlife</span><a href="#" class="dest-card-link" id="link-chilika">Explore &rarr;</a></div>
+          </div>
+        </div>
+
+        <div class="dest-card" id="card-bhubaneswar" data-category="heritage spiritual">
+          <div class="dest-card-img-wrap">
+            <img src="assets/images/bhubaneswar.jpg" alt="Lingaraj Temple Bhubaneswar" class="dest-card-img" loading="lazy" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Temple City</div>
+            <button class="dest-card-fav" id="fav-bhubaneswar" aria-label="Save Bhubaneswar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Khurda District</span>
+              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.8</span>
+            </div>
+            <h3 class="dest-card-title">Bhubaneswar</h3>
+            <p class="dest-card-desc">The City of Temples &mdash; home to the Lingaraj Temple, ancient Udayagiri caves, and over a thousand medieval temples.</p>
+            <div class="dest-card-footer"><span class="dest-card-tag">Heritage &amp; Spiritual</span><a href="#" class="dest-card-link" id="link-bhubaneswar">Explore &rarr;</a></div>
+          </div>
+        </div>
+
+        <div class="dest-card" id="card-simlipal" data-category="nature wildlife">
+          <div class="dest-card-img-wrap">
+            <img src="assets/images/simlipal.jpg" alt="Simlipal National Park" class="dest-card-img" loading="lazy" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Biosphere Reserve</div>
+            <button class="dest-card-fav" id="fav-simlipal" aria-label="Save Simlipal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Mayurbhanj</span>
+              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.6</span>
+            </div>
+            <h3 class="dest-card-title">Simlipal National Park</h3>
+            <p class="dest-card-desc">A UNESCO Biosphere Reserve with Royal Bengal Tigers, wild elephants, hidden waterfalls and dense sal forests.</p>
+            <div class="dest-card-footer"><span class="dest-card-tag">Wildlife</span><a href="#" class="dest-card-link" id="link-simlipal">Explore &rarr;</a></div>
+          </div>
+        </div>
+
+        <div class="dest-card" id="card-daringbadi" data-category="nature">
+          <div class="dest-card-img-wrap">
+            <div class="dest-card-img-placeholder"><div class="placeholder-icon">&#127956;</div></div>
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Kashmir of Odisha</div>
+            <button class="dest-card-fav" id="fav-daringbadi" aria-label="Save Daringbadi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kandhamal</span>
+              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.5</span>
+            </div>
+            <h3 class="dest-card-title">Daringbadi</h3>
+            <p class="dest-card-desc">Odisha's own hill station with misty valleys, coffee and pepper plantations, and frost in winter months.</p>
+            <div class="dest-card-footer"><span class="dest-card-tag">Nature</span><a href="#" class="dest-card-link" id="link-daringbadi">Explore &rarr;</a></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="view-all-wrap">
+        <a href="#" class="btn btn-outline-dark" id="btn-view-all-destinations">View All Destinations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE SECTION -->
+  <section class="culture-section" id="culture">
+    <div class="container">
+      <div class="section-header" id="culture-header">
+        <div class="section-tag">Heritage &amp; Traditions</div>
+        <h2 class="section-title section-title-light">Explore Odisha's Culture</h2>
+        <p class="section-subtitle section-subtitle-light">A tapestry of art, dance, festivals and culinary traditions spanning millennia</p>
+      </div>
+      <div class="culture-grid" id="culture-grid">
+        <div class="culture-card" id="culture-dance">
+          <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><path d="M12 2a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3 3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z"/><path d="M7 10l-2 5 4.5 2.5L12 22l2.5-4.5L19 15l-2-5"/></svg></div>
+          <h3 class="culture-card-title">Odissi Dance</h3>
+          <p class="culture-card-desc">One of India's classical dance forms with roots in temple traditions dating back 2,000 years. Known for sculpturesque poses and graceful movements.</p>
+          <a href="#" class="culture-link" id="link-odissi">Learn More &rarr;</a>
+        </div>
+        <div class="culture-card" id="culture-pattachitra">
+          <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
+          <h3 class="culture-card-title">Pattachitra Art</h3>
+          <p class="culture-card-desc">Intricate cloth-based scroll paintings depicting mythological stories, renowned for rich colors, creative motifs, and fine brushwork.</p>
+          <a href="#" class="culture-link" id="link-pattachitra">Learn More &rarr;</a>
+        </div>
+        <div class="culture-card" id="culture-rath">
+          <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><polygon points="12,2 22,20 2,20"/><line x1="12" y1="7" x2="12" y2="14"/><circle cx="12" cy="17" r="1"/></svg></div>
+          <h3 class="culture-card-title">Rath Yatra</h3>
+          <p class="culture-card-desc">The grand chariot festival of Lord Jagannath in Puri &mdash; a world-famous annual pilgrimage drawing millions of devotees every year.</p>
+          <a href="#" class="culture-link" id="link-rath-yatra">Learn More &rarr;</a>
+        </div>
+        <div class="culture-card" id="culture-cuisine">
+          <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><path d="M6 2 L6 8 Q6 12 12 12 Q18 12 18 8 L18 2"/><line x1="12" y1="12" x2="12" y2="22"/></svg></div>
+          <h3 class="culture-card-title">Odia Cuisine</h3>
+          <p class="culture-card-desc">Savour the divine Mahaprasad of Puri, traditional Dalma, Chhena Poda and aromatic Pakhala &mdash; a culinary heritage unique to Odisha.</p>
+          <a href="#" class="culture-link" id="link-cuisine">Learn More &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIP PLANNER SECTION -->
+  <section class="planner-section" id="trip-planner">
+    <div class="container">
+      <div class="planner-content" id="planner-content">
+        <div class="planner-text" id="planner-text">
+          <div class="section-tag">Smart Planning</div>
+          <h2 class="section-title">Plan Your Perfect<br /><span class="text-gold">Odisha Journey</span></h2>
+          <p class="planner-desc">Our intelligent trip planner helps you create a customized itinerary based on your interests, budget and travel duration.</p>
+          <ul class="planner-features" id="planner-features-list">
+            <li class="planner-feature"><span class="feature-check">&#10003;</span>Personalised itineraries for 1 to 14 day trips</li>
+            <li class="planner-feature"><span class="feature-check">&#10003;</span>Best routes between popular destinations</li>
+            <li class="planner-feature"><span class="feature-check">&#10003;</span>Budget-friendly accommodation suggestions</li>
+            <li class="planner-feature"><span class="feature-check">&#10003;</span>Local food, transport and travel tips</li>
+          </ul>
+          <a href="#" class="btn btn-primary" id="btn-start-planning">Start Planning Free</a>
+        </div>
+        <div class="planner-card-wrap" id="planner-card-wrap">
+          <div class="planner-card" id="trip-planner-card">
+            <h3 class="planner-card-title">Quick Trip Builder</h3>
+            <form class="planner-form" id="planner-form" onsubmit="handlePlannerForm(event)">
+              <div class="form-group">
+                <label for="trip-start" class="form-label">Starting From</label>
+                <input type="text" id="trip-start" class="form-input" placeholder="Your city / district" />
+              </div>
+              <div class="form-group">
+                <label for="trip-duration" class="form-label">Trip Duration</label>
+                <select id="trip-duration" class="form-input">
+                  <option value="">Select duration</option>
+                  <option value="1">1 Day (Bhubaneswar)</option>
+                  <option value="3">3 Days (Golden Triangle)</option>
+                  <option value="5">5 Days (Best of Odisha)</option>
+                  <option value="7">7 Days (Complete Tour)</option>
+                  <option value="14">14 Days (Grand Odisha)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Travel Style</label>
+                <div class="style-chips" id="style-chips">
+                  <button type="button" class="style-chip active" id="chip-cultural" data-style="cultural">Cultural</button>
+                  <button type="button" class="style-chip" id="chip-adventure" data-style="adventure">Adventure</button>
+                  <button type="button" class="style-chip" id="chip-spiritual" data-style="spiritual">Spiritual</button>
+                  <button type="button" class="style-chip" id="chip-nature" data-style="nature">Nature</button>
+                  <button type="button" class="style-chip" id="chip-beach" data-style="beach">Beach</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="trip-budget" class="form-label">Budget Range</label>
+                <select id="trip-budget" class="form-input">
+                  <option value="">Select budget</option>
+                  <option value="budget">Budget Friendly (Rs.1,000-3,000/day)</option>
+                  <option value="mid">Mid Range (Rs.3,000-8,000/day)</option>
+                  <option value="luxury">Premium (Rs.8,000+ /day)</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full" id="btn-generate-plan">Generate My Itinerary</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ODISHA -->
+  <section class="why-section" id="about">
+    <div class="container">
+      <div class="section-header" id="why-header">
+        <div class="section-tag">Why Odisha?</div>
+        <h2 class="section-title">The Soul of Incredible India</h2>
+        <p class="section-subtitle">Odisha offers an unmatched blend of ancient civilisation, natural wonder and living culture</p>
+      </div>
+      <div class="why-grid" id="why-grid">
+        <div class="why-card" id="why-heritage"><div class="why-number">01</div><h3 class="why-card-title">1,500+ Temples</h3><p class="why-card-desc">Bhubaneswar, the Temple City of India, has an unbroken lineage of Kalinga architecture spanning over 1,400 years.</p></div>
+        <div class="why-card" id="why-coast"><div class="why-number">02</div><h3 class="why-card-title">450 km Coastline</h3><p class="why-card-desc">From Olive Ridley turtle nesting sites at Gahirmatha to the serene beaches of Puri and Gopalpur.</p></div>
+        <div class="why-card" id="why-nature"><div class="why-number">03</div><h3 class="why-card-title">Rich Biodiversity</h3><p class="why-card-desc">Home to Royal Bengal Tigers, Irrawaddy Dolphins, Saltwater Crocodiles and over 500 species of birds.</p></div>
+        <div class="why-card" id="why-art"><div class="why-number">04</div><h3 class="why-card-title">Living Traditions</h3><p class="why-card-desc">Pattachitra, Tribal art, Sambalpuri weaving, Dhokra crafts &mdash; living traditions passed down through generations.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials-section">
+    <div class="container">
+      <div class="section-header" id="testimonials-header">
+        <div class="section-tag">Traveller Stories</div>
+        <h2 class="section-title section-title-light">What Travellers Say</h2>
+      </div>
+      <div class="testimonials-track-wrap" id="testimonials-wrap">
+        <div class="testimonials-track" id="testimonials-track">
+          <div class="testimonial-card" id="test-1"><div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testimonial-text">"The Konark Sun Temple left me speechless. The intricate carvings, the golden light at sunset &mdash; unlike anything I had ever seen. Odisha is India's best kept secret."</p><div class="testimonial-author"><div class="author-avatar">A</div><div><div class="author-name">Arjun Nair</div><div class="author-place">Bangalore, Karnataka</div></div></div></div>
+          <div class="testimonial-card" id="test-2"><div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testimonial-text">"Chilika Lake is magical &mdash; we saw Irrawaddy dolphins up close during the boat ride! The flamingos were a bonus. Odisha's nature is absolutely breathtaking."</p><div class="testimonial-author"><div class="author-avatar">P</div><div><div class="author-name">Priya Sharma</div><div class="author-place">Mumbai, Maharashtra</div></div></div></div>
+          <div class="testimonial-card" id="test-3"><div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testimonial-text">"Attending Rath Yatra in Puri was a life-changing experience. The scale, the devotion, the energy of the crowd &mdash; I had tears in my eyes. A must-visit for everyone."</p><div class="testimonial-author"><div class="author-avatar">R</div><div><div class="author-name">Rahul Das</div><div class="author-place">Kolkata, West Bengal</div></div></div></div>
+          <div class="testimonial-card" id="test-4"><div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="testimonial-text">"We did a 7-day Odisha trip using the itinerary guide and it was perfectly paced. The local food &mdash; especially the Mahaprasad &mdash; was extraordinary. Highly recommend!"</p><div class="testimonial-author"><div class="author-avatar">S</div><div><div class="author-name">Sneha Reddy</div><div class="author-place">Hyderabad, Telangana</div></div></div></div>
+        </div>
+      </div>
+      <div class="testimonial-nav" id="testimonial-nav">
+        <button class="t-nav-btn" id="t-nav-prev" aria-label="Previous"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,18 9,12 15,6"/></svg></button>
+        <div class="t-dots" id="t-dots">
+          <button class="t-dot active" id="t-dot-0" aria-label="Go to review 1"></button>
+          <button class="t-dot" id="t-dot-1" aria-label="Go to review 2"></button>
+          <button class="t-dot" id="t-dot-2" aria-label="Go to review 3"></button>
+          <button class="t-dot" id="t-dot-3" aria-label="Go to review 4"></button>
+        </div>
+        <button class="t-nav-btn" id="t-nav-next" aria-label="Next"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,18 15,12 9,6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section" id="newsletter-section">
+    <div class="container">
+      <div class="newsletter-card" id="newsletter-card">
+        <div class="newsletter-decoration" aria-hidden="true"><div class="nd-circle nd-circle-1"></div><div class="nd-circle nd-circle-2"></div></div>
+        <div class="newsletter-content" id="newsletter-content">
+          <div class="newsletter-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <h2 class="newsletter-title">Stay Updated with Odisha</h2>
+          <p class="newsletter-subtitle">Get travel tips, festival alerts, destination guides and exclusive deals delivered to your inbox.</p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="handleNewsletter(event)">
+            <input type="email" id="newsletter-email" class="newsletter-input" placeholder="Enter your email address" required />
+            <button type="submit" class="btn btn-primary" id="btn-newsletter-submit">Subscribe</button>
+          </form>
+          <p class="newsletter-note">No spam, ever. Unsubscribe anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header" id="contact-header">
+        <div class="section-tag">Get in Touch</div>
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Have questions or need help planning your Odisha trip? We are here for you.</p>
+      </div>
+      <div class="contact-grid" id="contact-grid">
+        <div class="contact-info" id="contact-info">
+          <div class="contact-item" id="contact-email-item"><div class="contact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="contact-label">Email</div><a href="mailto:hello@odisha360.in" class="contact-value">hello@odisha360.in</a></div></div>
+          <div class="contact-item" id="contact-phone-item"><div class="contact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.44a2 2 0 0 1 1.95-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.92-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="contact-label">Phone</div><a href="tel:+916740000000" class="contact-value">+91 674 2XX XXXX</a></div></div>
+          <div class="contact-item" id="contact-location-item"><div class="contact-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="contact-label">Address</div><span class="contact-value">Bhubaneswar, Odisha &ndash; 751001, India</span></div></div>
+        </div>
+        <form class="contact-form" id="contact-form" onsubmit="handleContact(event)">
+          <div class="form-row">
+            <div class="form-group"><label for="contact-name" class="form-label">Full Name</label><input type="text" id="contact-name" class="form-input" placeholder="Your name" required /></div>
+            <div class="form-group"><label for="contact-email-field" class="form-label">Email</label><input type="email" id="contact-email-field" class="form-input" placeholder="your@email.com" required /></div>
+          </div>
+          <div class="form-group"><label for="contact-subject" class="form-label">Subject</label><input type="text" id="contact-subject" class="form-input" placeholder="How can we help?" /></div>
+          <div class="form-group"><label for="contact-message" class="form-label">Message</label><textarea id="contact-message" class="form-input form-textarea" placeholder="Tell us about your trip plans..." rows="5" required></textarea></div>
+          <button type="submit" class="btn btn-primary btn-full" id="btn-send-message">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid" id="footer-grid">
+        <div class="footer-brand" id="footer-brand">
+          <a href="#home" class="nav-logo footer-logo"><div class="logo-icon"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#D5A746" stroke-width="2"/><path d="M8 16 Q16 6 24 16 Q16 26 8 16Z" fill="#D5A746" opacity="0.8"/><circle cx="16" cy="16" r="3" fill="#D5A746"/></svg></div><span class="logo-text">Odisha <span class="logo-accent">360</span></span></a>
+          <p class="footer-tagline">Your complete travel companion for exploring the magnificent state of Odisha &mdash; where history, nature and spirituality converge.</p>
+          <div class="footer-social" id="footer-social">
+            <a href="#" class="social-btn" id="social-instagram" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" class="social-btn" id="social-facebook" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" class="social-btn" id="social-youtube" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></a>
+            <a href="#" class="social-btn" id="social-twitter" aria-label="Twitter X"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03A12.84 12.84 0 0 1 2 1.64a4.52 4.52 0 0 0 1.4 6.04 4.5 4.5 0 0 1-2.05-.56v.06c0 2.19 1.56 4.02 3.63 4.43a4.52 4.52 0 0 1-2.04.08 4.52 4.52 0 0 0 4.22 3.14A9.07 9.07 0 0 1 1 19.54a12.82 12.82 0 0 0 6.95 2.04c8.34 0 12.9-6.91 12.9-12.9 0-.2 0-.39-.01-.58A9.22 9.22 0 0 0 23 3z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col" id="footer-explore-col"><h4 class="footer-col-title">Explore</h4><ul class="footer-links"><li><a href="#" class="footer-link" id="fl-destinations">Destinations</a></li><li><a href="#" class="footer-link" id="fl-heritage">Heritage Sites</a></li><li><a href="#" class="footer-link" id="fl-beaches">Beaches</a></li><li><a href="#" class="footer-link" id="fl-wildlife">Wildlife Parks</a></li><li><a href="#" class="footer-link" id="fl-tribal">Tribal Tourism</a></li></ul></div>
+        <div class="footer-col" id="footer-plan-col"><h4 class="footer-col-title">Plan</h4><ul class="footer-links"><li><a href="#" class="footer-link" id="fl-planner">Trip Planner</a></li><li><a href="#" class="footer-link" id="fl-itineraries">Itineraries</a></li><li><a href="#" class="footer-link" id="fl-hotels">Hotels</a></li><li><a href="#" class="footer-link" id="fl-transport">Transport</a></li><li><a href="#" class="footer-link" id="fl-guide">Travel Guide</a></li></ul></div>
+        <div class="footer-col" id="footer-info-col"><h4 class="footer-col-title">Information</h4><ul class="footer-links"><li><a href="#" class="footer-link" id="fl-about">About Us</a></li><li><a href="#" class="footer-link" id="fl-blog">Blog</a></li><li><a href="#" class="footer-link" id="fl-faq">FAQ</a></li><li><a href="#contact" class="footer-link" id="fl-contact">Contact</a></li><li><a href="#" class="footer-link" id="fl-privacy">Privacy Policy</a></li></ul></div>
+      </div>
+      <div class="footer-bottom" id="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Odisha 360. Made with &hearts; for Odisha.</p>
+        <p class="footer-credits">Designed for national-level innovation &amp; tourism excellence.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
