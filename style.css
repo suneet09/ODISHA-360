@@ -279,6 +279,33 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .nav-link:hover::after, .nav-link.active::after { width: 60%; }
 
+/* Mini Earth special nav link */
+.nav-link-earth {
+  background: linear-gradient(135deg, #174C35, #1E6B4A) !important;
+  color: #fff !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(213,167,70,0.3);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.nav-link-earth:hover {
+  background: linear-gradient(135deg, #1E6B4A, #24814F) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(23,76,53,0.4);
+}
+.nav-link-earth::after { display: none !important; }
+.mobile-nav-link-earth {
+  color: #D5A746 !important;
+  font-weight: 600;
+}
+
+
 /* Nav Actions */
 .nav-actions {
   display: flex;
@@ -2336,4 +2363,193 @@ a.contact-value:hover { color: var(--green-dark); text-decoration: underline; }
   .testimonials-section { padding: 60px 0; }
   .newsletter-card { padding: 32px 20px; }
   .planner-card { padding: 24px 20px; }
+}
+
+
+/* District Filter Bar */
+.district-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  background: var(--white);
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 1px solid rgba(23,76,53,0.1);
+  box-shadow: var(--shadow-sm);
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.district-filter-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.district-select {
+  padding: 8px 18px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(23,76,53,0.18);
+  background: var(--bg-light);
+  color: var(--text-dark);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition);
+}
+.district-select:focus, .district-select:hover {
+  border-color: var(--green-dark);
+  background: var(--white);
+}
+
+.pin-religious  { background: linear-gradient(135deg, #ef6c00, #c62828); }
+.pin-waterfalls { background: linear-gradient(135deg, #00acc1, #006064); }
+
+
+/* ============================================================
+   MINI EARTH — PROMO BANNER ON HOMEPAGE
+   ============================================================ */
+
+.miniearth-promo {
+  position: relative;
+  background: linear-gradient(135deg, #030b18 0%, #0a1a32 50%, #0d2244 100%);
+  padding: 90px 0;
+  overflow: hidden;
+}
+
+/* Animated star particles */
+.me-promo-bg { position: absolute; inset: 0; pointer-events: none; }
+.me-promo-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.7);
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.6); }
+}
+
+.me-promo-content {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+/* Spinning globe side */
+.me-promo-globe-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(23,76,53,0.3), rgba(3,11,24,0.6));
+  border: 2px solid rgba(213,167,70,0.2);
+  box-shadow: 0 0 60px rgba(79,195,247,0.15), inset 0 0 40px rgba(23,76,53,0.1);
+}
+
+.me-promo-globe {
+  font-size: 5.5rem;
+  animation: globeSpin 8s linear infinite;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(79,195,247,0.4));
+}
+
+@keyframes globeSpin {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.08); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+
+/* Text side */
+.me-promo-text { flex: 1; }
+
+.me-promo-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #e8eaf0;
+  line-height: 1.2;
+  margin: 10px 0 16px;
+}
+.me-promo-highlight {
+  background: linear-gradient(90deg, #D5A746, #f0c46a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.me-promo-subtitle {
+  font-size: 1rem;
+  color: rgba(232,234,240,0.7);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 520px;
+}
+
+.me-promo-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 20px;
+  margin-bottom: 28px;
+}
+
+.me-promo-feat {
+  font-size: 0.84rem;
+  color: rgba(232,234,240,0.75);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.me-promo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #174C35, #1E6B4A);
+  color: #fff;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(213,167,70,0.25);
+  box-shadow: 0 4px 20px rgba(23,76,53,0.4);
+}
+.me-promo-btn:hover {
+  background: linear-gradient(135deg, #1E6B4A, #24814F);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(23,76,53,0.6);
+}
+
+@media (max-width: 860px) {
+  .me-promo-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 36px;
+  }
+  .me-promo-title { font-size: 1.9rem; }
+  .me-promo-subtitle { margin-left: auto; margin-right: auto; }
+  .me-promo-features { grid-template-columns: 1fr; justify-items: center; }
+  .me-promo-globe-wrap { width: 150px; height: 150px; }
+  .me-promo-globe { font-size: 4rem; }
+}
+
+@media (max-width: 480px) {
+  .miniearth-promo { padding: 60px 0; }
+  .me-promo-title { font-size: 1.5rem; }
+  .me-promo-btn { padding: 12px 20px; font-size: 0.9rem; }
 }

@@ -46,6 +46,7 @@
         <li><a href="#categories" class="nav-link" id="nav-categories">Categories</a></li>
         <li><a href="#destinations" class="nav-link" id="nav-explore">Destinations</a></li>
         <li><a href="#interactive-map" class="nav-link" id="nav-map">Map</a></li>
+        <li><a href="miniearth.html" class="nav-link nav-link-earth" id="nav-miniearth">🌍 Mini Earth</a></li>
         <li><a href="#trip-planner" class="nav-link" id="nav-trip">Trip Planner</a></li>
         <li><a href="#culture" class="nav-link" id="nav-culture">Culture</a></li>
         <li><a href="#why-us" class="nav-link" id="nav-about">Why Odisha 360</a></li>
@@ -82,6 +83,7 @@
         <li><a href="#categories" class="mobile-nav-link" id="m-nav-categories">Categories</a></li>
         <li><a href="#destinations" class="mobile-nav-link" id="m-nav-explore">Destinations</a></li>
         <li><a href="#interactive-map" class="mobile-nav-link" id="m-nav-map">Interactive Map</a></li>
+        <li><a href="miniearth.html" class="mobile-nav-link mobile-nav-link-earth" id="m-nav-miniearth">🌍 Mini Earth — 3D Globe</a></li>
         <li><a href="#trip-planner" class="mobile-nav-link" id="m-nav-trip">Trip Planner</a></li>
         <li><a href="#culture" class="mobile-nav-link" id="m-nav-culture">Culture &amp; Heritage</a></li>
         <li><a href="#why-us" class="mobile-nav-link" id="m-nav-about">Why Odisha 360</a></li>
@@ -327,16 +329,41 @@
 
       <!-- Filter Buttons -->
       <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn active" id="filter-all" data-filter="all">All Destinations</button>
-        <button class="filter-btn" id="filter-heritage" data-filter="heritage">Heritage &amp; History</button>
-        <button class="filter-btn" id="filter-nature" data-filter="nature">Nature &amp; Hills</button>
-        <button class="filter-btn" id="filter-beach" data-filter="beach">Beaches</button>
-        <button class="filter-btn" id="filter-spiritual" data-filter="spiritual">Spiritual</button>
-        <button class="filter-btn" id="filter-wildlife" data-filter="wildlife">Wildlife</button>
+        <button class="filter-btn active" id="filter-all" data-filter="all">All (31)</button>
+        <button class="filter-btn" id="filter-religious" data-filter="religious">Religious Tourism</button>
+        <button class="filter-btn" id="filter-heritage" data-filter="heritage">Historical &amp; Heritage</button>
+        <button class="filter-btn" id="filter-wildlife" data-filter="wildlife">Nature &amp; Wildlife</button>
+        <button class="filter-btn" id="filter-beach" data-filter="beach">Beaches &amp; Coastal</button>
+        <button class="filter-btn" id="filter-waterfalls" data-filter="waterfalls">Lakes &amp; Waterfalls</button>
+        <button class="filter-btn" id="filter-hills" data-filter="hills">Adventure &amp; Hills</button>
         <button class="filter-btn filter-btn-fav" id="filter-saved" data-filter="saved">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           Saved (<span id="saved-filter-count">0</span>)
         </button>
+      </div>
+
+      <!-- District Filter Bar -->
+      <div class="district-filter-bar" id="district-filter-bar">
+        <span class="district-filter-label"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;vertical-align:-2px;color:var(--gold);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Filter by District:</span>
+        <select id="district-filter-select" class="district-select" onchange="filterByDistrict(this.value)" aria-label="Filter destinations by Odisha district">
+          <option value="all">All Districts (31 Destinations)</option>
+          <option value="Balangir">Balangir</option>
+          <option value="Balasore">Balasore</option>
+          <option value="Bargarh">Bargarh</option>
+          <option value="Cuttack">Cuttack</option>
+          <option value="Dhenkanal">Dhenkanal</option>
+          <option value="Ganjam">Ganjam</option>
+          <option value="Kalahandi">Kalahandi</option>
+          <option value="Kandhamal">Kandhamal</option>
+          <option value="Kendrapara">Kendrapara</option>
+          <option value="Keonjhar">Keonjhar</option>
+          <option value="Khurda">Khurda (Bhubaneswar)</option>
+          <option value="Koraput">Koraput</option>
+          <option value="Mayurbhanj">Mayurbhanj</option>
+          <option value="Puri">Puri</option>
+          <option value="Sambalpur">Sambalpur</option>
+          <option value="Sundargarh">Sundargarh</option>
+        </select>
       </div>
 
       <!-- Destinations Grid -->
@@ -540,6 +567,666 @@
           </div>
         </div>
 
+        <!-- Card: Maa Taratarini Temple -->
+        <div class="dest-card" id="card-taratarini" data-id="taratarini" data-category="religious" data-district="Ganjam">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Taratarini_temple.jpg/800px-Taratarini_temple.jpg" alt="Maa Taratarini Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Adi Shakti Peetha</div>
+            <button class="dest-card-fav" id="fav-taratarini" data-dest-id="taratarini" aria-label="Save Maa Taratarini Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Ganjam District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (1.6k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Maa Taratarini Temple</h3>
+            <p class="dest-card-desc">Ancient Adi Shakti Peetha on Kumari hills along Rushikulya river, revered by sea-faring Odia merchants for over 2,000 years.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Adi Shakti Peetha</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('taratarini')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Maa Tarini Temple, Ghatagaon -->
+        <div class="dest-card" id="card-tarini_ghatagaon" data-id="tarini_ghatagaon" data-category="religious" data-district="Keonjhar">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Maa_Tarini_Temple_Ghatagaon.jpg/800px-Maa_Tarini_Temple_Ghatagaon.jpg" alt="Maa Tarini Temple, Ghatagaon" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Sacred Shakti Shrine</div>
+            <button class="dest-card-fav" id="fav-tarini_ghatagaon" data-dest-id="tarini_ghatagaon" aria-label="Save Maa Tarini Temple, Ghatagaon to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Keonjhar District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.9 (2.8k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Maa Tarini Temple, Ghatagaon</h3>
+            <p class="dest-card-desc">Revered living goddess of Odisha surrounded by sal forests; famous for the unique state-wide coconut offering tradition.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Sacred Shakti Shrine</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('tarini_ghatagaon')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Lingaraj Temple -->
+        <div class="dest-card" id="card-lingaraj" data-id="lingaraj" data-category="religious heritage" data-district="Khurda">
+          <div class="dest-card-img-wrap">
+            <img src="assets/images/bhubaneswar.jpg" alt="Lingaraj Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">11th-Century Kalinga Marvel</div>
+            <button class="dest-card-fav" id="fav-lingaraj" data-dest-id="lingaraj" aria-label="Save Lingaraj Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Khurda District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.9 (3.5k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Lingaraj Temple</h3>
+            <p class="dest-card-desc">The largest and most majestic temple in Bhubaneswar, dedicated to Lord Harihara with an imposing 180-foot stone vimana.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">11th-Century Kalinga Marvel</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('lingaraj')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Udayagiri & Khandagiri Caves -->
+        <div class="dest-card" id="card-udayagiri_khandagiri" data-id="udayagiri_khandagiri" data-category="heritage hills" data-district="Khurda">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=800&q=80" alt="Udayagiri & Khandagiri Caves" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/bhubaneswar.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">2nd Century BCE Rock Caves</div>
+            <button class="dest-card-fav" id="fav-udayagiri_khandagiri" data-dest-id="udayagiri_khandagiri" aria-label="Save Udayagiri & Khandagiri Caves to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Khurda District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (2.1k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Udayagiri & Khandagiri Caves</h3>
+            <p class="dest-card-desc">Ancient rock-cut monastic caves of Jain ascetics featuring Emperor Kharavela's historic Hathigumpha Brahmi inscription.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">2nd Century BCE Rock Caves</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('udayagiri_khandagiri')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Nandankanan Zoological Park -->
+        <div class="dest-card" id="card-nandankanan" data-id="nandankanan" data-category="wildlife nature" data-district="Khurda">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1561731216-c3a4d99437d5?auto=format&fit=crop&w=800&q=80" alt="Nandankanan Zoological Park" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/simlipal.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Premier Sanctuary & Zoo</div>
+            <button class="dest-card-fav" id="fav-nandankanan" data-dest-id="nandankanan" aria-label="Save Nandankanan Zoological Park to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Khurda District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (4.2k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Nandankanan Zoological Park</h3>
+            <p class="dest-card-desc">World-famous 437-hectare sanctuary and zoo abutting Kanjia Lake; first in the world to breed white and melanistic tigers.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Premier Sanctuary & Zoo</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('nandankanan')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Barabati Fort -->
+        <div class="dest-card" id="card-barabati_fort" data-id="barabati_fort" data-category="heritage" data-district="Cuttack">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Barabati_fort_cuttack.jpg/800px-Barabati_fort_cuttack.jpg" alt="Barabati Fort" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/bhubaneswar.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">14th-Century Citadel</div>
+            <button class="dest-card-fav" id="fav-barabati_fort" data-dest-id="barabati_fort" aria-label="Save Barabati Fort to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Cuttack District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.5 (1.1k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Barabati Fort</h3>
+            <p class="dest-card-desc">Historic Ganga dynasty fortress at the Mahanadi-Kathajodi delta with an ornate stone gateway, palace ruins, and moat.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">14th-Century Citadel</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('barabati_fort')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Ansupa Lake -->
+        <div class="dest-card" id="card-ansupa_lake" data-id="ansupa_lake" data-category="waterfalls nature" data-district="Cuttack">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Ansupa_Lake_Odisha.jpg/800px-Ansupa_Lake_Odisha.jpg" alt="Ansupa Lake" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/chilika.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Largest Freshwater Oxbow Lake</div>
+            <button class="dest-card-fav" id="fav-ansupa_lake" data-dest-id="ansupa_lake" aria-label="Save Ansupa Lake to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Cuttack District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.6 (850)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Ansupa Lake</h3>
+            <p class="dest-card-desc">Horseshoe-shaped freshwater oxbow lake cradled between Saranda and Bishnupur hills, teeming with floating water lilies.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Largest Freshwater Oxbow Lake</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('ansupa_lake')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Gahirmatha Marine Sanctuary -->
+        <div class="dest-card" id="card-gahirmatha" data-id="gahirmatha" data-category="wildlife beach" data-district="Kendrapara">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1518467166778-b88f373ffec7?auto=format&fit=crop&w=800&q=80" alt="Gahirmatha Marine Sanctuary" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/chilika.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">World's Largest Turtle Rookery</div>
+            <button class="dest-card-fav" id="fav-gahirmatha" data-dest-id="gahirmatha" aria-label="Save Gahirmatha Marine Sanctuary to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Kendrapara District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (980)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Gahirmatha Marine Sanctuary</h3>
+            <p class="dest-card-desc">The world's largest nesting beach for endangered Olive Ridley sea turtles, spanning 1,435 sq km of marine sanctuary.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">World's Largest Turtle Rookery</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('gahirmatha')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Talsari Beach -->
+        <div class="dest-card" id="card-talsari" data-id="talsari" data-category="beach" data-district="Balasore">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Talsari Beach" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/puri.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Serene Virgin Coast</div>
+            <button class="dest-card-fav" id="fav-talsari" data-dest-id="talsari" aria-label="Save Talsari Beach to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Balasore District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.6 (1.1k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Talsari Beach</h3>
+            <p class="dest-card-desc">Pristine palm-fringed beach along Subarnarekha estuary; famous for red ghost crab colonies and vast low-tide sandy plains.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Serene Virgin Coast</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('talsari')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Bichitrapur Mangrove Sanctuary -->
+        <div class="dest-card" id="card-bichitrapur" data-id="bichitrapur" data-category="wildlife nature" data-district="Balasore">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Bichitrapur Mangrove Sanctuary" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/chilika.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Coastal Mangrove Reserve</div>
+            <button class="dest-card-fav" id="fav-bichitrapur" data-dest-id="bichitrapur" aria-label="Save Bichitrapur Mangrove Sanctuary to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Balasore District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (760)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Bichitrapur Mangrove Sanctuary</h3>
+            <p class="dest-card-desc">Unique 563-hectare tidal mangrove forest on the Bay of Bengal with creek boat safaris and prehistoric horseshoe crabs.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Coastal Mangrove Reserve</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('bichitrapur')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Panchalingeswar Temple -->
+        <div class="dest-card" id="card-panchalingeswar" data-id="panchalingeswar" data-category="religious nature" data-district="Balasore">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Panchalingeswar_Temple_Hill.jpg/800px-Panchalingeswar_Temple_Hill.jpg" alt="Panchalingeswar Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Five Submerged Lingas</div>
+            <button class="dest-card-fav" id="fav-panchalingeswar" data-dest-id="panchalingeswar" aria-label="Save Panchalingeswar Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Balasore District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (1.8k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Panchalingeswar Temple</h3>
+            <p class="dest-card-desc">Scenic hilltop shrine in Nilagiri where five natural Shiva Lingas remain submerged under a crystal mountain stream.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Five Submerged Lingas</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('panchalingeswar')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Kuldiha Wildlife Sanctuary -->
+        <div class="dest-card" id="card-kuldiha" data-id="kuldiha" data-category="wildlife nature" data-district="Balasore">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80" alt="Kuldiha Wildlife Sanctuary" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/simlipal.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Elephant Corridor Sanctuary</div>
+            <button class="dest-card-fav" id="fav-kuldiha" data-dest-id="kuldiha" aria-label="Save Kuldiha Wildlife Sanctuary to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Balasore District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.6 (690)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Kuldiha Wildlife Sanctuary</h3>
+            <p class="dest-card-desc">Dense mixed deciduous forest sanctuary of Nilagiri hills; vital elephant corridor home to wild herds, gaur, and hornbills.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Elephant Corridor Sanctuary</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('kuldiha')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Kapilash Temple & Mountain -->
+        <div class="dest-card" id="card-kapilash" data-id="kapilash" data-category="religious hills" data-district="Dhenkanal">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Kapilash_Temple_Dhenkanal.jpg/800px-Kapilash_Temple_Dhenkanal.jpg" alt="Kapilash Temple & Mountain" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Kailash of Odisha</div>
+            <button class="dest-card-fav" id="fav-kapilash" data-dest-id="kapilash" aria-label="Save Kapilash Temple & Mountain to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Dhenkanal District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (1.9k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Kapilash Temple & Mountain</h3>
+            <p class="dest-card-desc">Summit shrine of Lord Chandrasekhar at 2,239 feet reached by 1,352 stone steps or a winding 12-ghat serpentine hill road.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Kailash of Odisha</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('kapilash')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Joranda Mahima Gadi -->
+        <div class="dest-card" id="card-joranda" data-id="joranda" data-category="religious heritage" data-district="Dhenkanal">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Joranda_Gadi_Mandir.jpg/800px-Joranda_Gadi_Mandir.jpg" alt="Joranda Mahima Gadi" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/bhubaneswar.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Seat of Mahima Dharma</div>
+            <button class="dest-card-fav" id="fav-joranda" data-dest-id="joranda" aria-label="Save Joranda Mahima Gadi to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Dhenkanal District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (1.2k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Joranda Mahima Gadi</h3>
+            <p class="dest-card-desc">International spiritual headquarters of Mahima Dharma where worshippers meditate upon the formless divine Alekha.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Seat of Mahima Dharma</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('joranda')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Maa Samaleswari Temple -->
+        <div class="dest-card" id="card-samaleswari" data-id="samaleswari" data-category="religious heritage" data-district="Sambalpur">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Samaleswari_Temple_Sambalpur.jpg/800px-Samaleswari_Temple_Sambalpur.jpg" alt="Maa Samaleswari Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Presiding Deity of Western Odisha</div>
+            <button class="dest-card-fav" id="fav-samaleswari" data-dest-id="samaleswari" aria-label="Save Maa Samaleswari Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Sambalpur District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.9 (3.1k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Maa Samaleswari Temple</h3>
+            <p class="dest-card-desc">Patron goddess of Western Odisha on the Mahanadi riverbank; epicenter of Nuakhai festival, now with modern SAMALEI corridor.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Presiding Deity of Western Odisha</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('samaleswari')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Huma Leaning Temple -->
+        <div class="dest-card" id="card-huma_temple" data-id="huma_temple" data-category="heritage religious" data-district="Sambalpur">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Huma_Leaning_Temple.jpg/800px-Huma_Leaning_Temple.jpg" alt="Huma Leaning Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/konark.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">World's Only Leaning Shiva Temple</div>
+            <button class="dest-card-fav" id="fav-huma_temple" data-dest-id="huma_temple" aria-label="Save Huma Leaning Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Sambalpur District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (1.4k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Huma Leaning Temple</h3>
+            <p class="dest-card-desc">17th-century leaning temple on the Mahanadi river, famous for its distinct architectural tilt and sacred tame Kudo fish.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">World's Only Leaning Shiva Temple</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('huma_temple')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Harishankar Temple & Stream -->
+        <div class="dest-card" id="card-harishankar" data-id="harishankar" data-category="religious waterfalls" data-district="Balangir">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Harishankar_temple_stream.jpg/800px-Harishankar_temple_stream.jpg" alt="Harishankar Temple & Stream" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/simlipal.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Dual Deity Healing Springs</div>
+            <button class="dest-card-fav" id="fav-harishankar" data-dest-id="harishankar" aria-label="Save Harishankar Temple & Stream to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Balangir District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (2.2k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Harishankar Temple & Stream</h3>
+            <p class="dest-card-desc">Sacred shrine on the Gandhamardan hills where Lord Vishnu and Shiva are worshipped together alongside healing mountain waters.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Dual Deity Healing Springs</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('harishankar')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Nrusinghanath Temple -->
+        <div class="dest-card" id="card-nrusinghanath" data-id="nrusinghanath" data-category="religious waterfalls" data-district="Bargarh">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Nrusinghanath_temple.jpg/800px-Nrusinghanath_temple.jpg" alt="Nrusinghanath Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">14th-Century Feline Deity</div>
+            <button class="dest-card-fav" id="fav-nrusinghanath" data-dest-id="nrusinghanath" aria-label="Save Nrusinghanath Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Bargarh District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (2.0k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Nrusinghanath Temple</h3>
+            <p class="dest-card-desc">14th-century temple on northern Gandhamardan slopes dedicated to Lord Vishnu as Marjara Kesari, with four scenic waterfalls.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">14th-Century Feline Deity</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('nrusinghanath')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Gupteswar Cave Temple -->
+        <div class="dest-card" id="card-gupteswar" data-id="gupteswar" data-category="religious hills" data-district="Koraput">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Gupteswar_Cave_entrance.jpg/800px-Gupteswar_Cave_entrance.jpg" alt="Gupteswar Cave Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/simlipal.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Sacred Stalagmite Cave</div>
+            <button class="dest-card-fav" id="fav-gupteswar" data-dest-id="gupteswar" aria-label="Save Gupteswar Cave Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Koraput District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (1.7k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Gupteswar Cave Temple</h3>
+            <p class="dest-card-desc">Cavernous limestone cave temple in Ramagiri forest housing a 2-meter natural stalagmite Shiva Linga alongside Sabari river.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Sacred Stalagmite Cave</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('gupteswar')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Khandadhar Waterfall -->
+        <div class="dest-card" id="card-khandadhar" data-id="khandadhar" data-category="waterfalls hills" data-district="Sundargarh">
+          <div class="dest-card-img-wrap">
+            <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80" alt="Khandadhar Waterfall" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/simlipal.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">244-Meter Sword-Edge Fall</div>
+            <button class="dest-card-fav" id="fav-khandadhar" data-dest-id="khandadhar" aria-label="Save Khandadhar Waterfall to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Sundargarh District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (1.5k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Khandadhar Waterfall</h3>
+            <p class="dest-card-desc">Odisha's 2nd highest waterfall plunging 244 meters (801 ft) in a sheer sword-shaped drop amidst virgin sal jungles.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">244-Meter Sword-Edge Fall</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('khandadhar')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Kichakeswari Temple, Khiching -->
+        <div class="dest-card" id="card-kichakeswari" data-id="kichakeswari" data-category="heritage religious" data-district="Mayurbhanj">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Khiching_Temple_Mayurbhanj.jpg/800px-Khiching_Temple_Mayurbhanj.jpg" alt="Kichakeswari Temple, Khiching" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/konark.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Black Chlorite Architectural Wonder</div>
+            <button class="dest-card-fav" id="fav-kichakeswari" data-dest-id="kichakeswari" aria-label="Save Kichakeswari Temple, Khiching to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Mayurbhanj District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.7 (1.3k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Kichakeswari Temple, Khiching</h3>
+            <p class="dest-card-desc">10th-century architectural marvel built entirely from black chlorite stone, featuring sculptures rivaling Konark.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Black Chlorite Architectural Wonder</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('kichakeswari')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card: Maa Manikeswari Temple -->
+        <div class="dest-card" id="card-manikeswari" data-id="manikeswari" data-category="religious heritage" data-district="Kalahandi">
+          <div class="dest-card-img-wrap">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Manikeswari_Temple_Bhawanipatna.jpg/800px-Manikeswari_Temple_Bhawanipatna.jpg" alt="Maa Manikeswari Temple" class="dest-card-img" loading="lazy" onerror="this.onerror=null; this.src='assets/images/hero.jpg';" />
+            <div class="dest-card-overlay"></div>
+            <div class="dest-card-badge">Presiding Goddess of Kalahandi</div>
+            <button class="dest-card-fav" id="fav-manikeswari" data-dest-id="manikeswari" aria-label="Save Maa Manikeswari Temple to wishlist">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+          <div class="dest-card-body">
+            <div class="dest-card-meta">
+              <span class="dest-card-location">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Kalahandi District
+              </span>
+              <span class="dest-card-rating">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
+                4.8 (1.6k)
+              </span>
+            </div>
+            <h3 class="dest-card-title">Maa Manikeswari Temple</h3>
+            <p class="dest-card-desc">Patron deity of the Kalahandi kingdom famous for the vibrant annual Chhatar Yatra festival celebrating folk Shakti heritage.</p>
+            <div class="dest-card-footer">
+              <span class="dest-card-tag">Presiding Goddess of Kalahandi</span>
+              <a href="javascript:void(0)" class="dest-card-link" onclick="openDestModal('manikeswari')">Explore Details &rarr;</a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Empty State for Searches with No Results -->
@@ -551,7 +1238,7 @@
       </div>
 
       <div class="view-all-wrap">
-        <button class="btn btn-outline-dark" id="btn-view-all-destinations" onclick="resetDestinationFilters()">View All 480+ Odisha Destinations</button>
+        <button class="btn btn-outline-dark" id="btn-view-all-destinations" onclick="resetDestinationFilters()">Reset &amp; View All 31 Destinations</button>
       </div>
     </div>
   </section>
@@ -571,12 +1258,13 @@
       <div class="map-toolbar" id="map-toolbar">
         <div class="map-filter-group" id="map-filter-group">
           <span class="map-filter-label">Filter Markers:</span>
-          <button class="map-filter-btn active" data-map-filter="all">All (12)</button>
+          <button class="map-filter-btn active" data-map-filter="all">All (31)</button>
+          <button class="map-filter-btn" data-map-filter="religious">Religious</button>
           <button class="map-filter-btn" data-map-filter="heritage">Heritage</button>
+          <button class="map-filter-btn" data-map-filter="wildlife">Nature &amp; Wildlife</button>
           <button class="map-filter-btn" data-map-filter="beach">Beaches</button>
-          <button class="map-filter-btn" data-map-filter="wildlife">Wildlife &amp; Nature</button>
-          <button class="map-filter-btn" data-map-filter="spiritual">Spiritual</button>
-          <button class="map-filter-btn" data-map-filter="hills">Hills &amp; Waterfalls</button>
+          <button class="map-filter-btn" data-map-filter="waterfalls">Lakes &amp; Waterfalls</button>
+          <button class="map-filter-btn" data-map-filter="hills">Hills &amp; Adventure</button>
         </div>
         <div class="map-view-actions">
           <button class="map-action-btn" id="btn-reset-map" onclick="resetMapView()" title="Reset View to Odisha">
@@ -593,11 +1281,12 @@
 
       <!-- Map Legend -->
       <div class="map-legend" id="map-legend">
-        <div class="legend-item"><span class="legend-pin pin-heritage"></span><span>UNESCO &amp; Heritage Sites</span></div>
-        <div class="legend-item"><span class="legend-pin pin-beach"></span><span>Golden Beaches &amp; Coast</span></div>
-        <div class="legend-item"><span class="legend-pin pin-wildlife"></span><span>Tiger &amp; Bird Sanctuaries</span></div>
-        <div class="legend-item"><span class="legend-pin pin-spiritual"></span><span>Sacred Shrines &amp; Temples</span></div>
-        <div class="legend-item"><span class="legend-pin pin-hills"></span><span>Hill Stations &amp; Waterfalls</span></div>
+        <div class="legend-item"><span class="legend-pin pin-religious"></span><span>Religious Shrines</span></div>
+        <div class="legend-item"><span class="legend-pin pin-heritage"></span><span>Historical &amp; Heritage</span></div>
+        <div class="legend-item"><span class="legend-pin pin-wildlife"></span><span>Nature &amp; Wildlife</span></div>
+        <div class="legend-item"><span class="legend-pin pin-beach"></span><span>Beaches &amp; Coast</span></div>
+        <div class="legend-item"><span class="legend-pin pin-waterfalls"></span><span>Lakes &amp; Waterfalls</span></div>
+        <div class="legend-item"><span class="legend-pin pin-hills"></span><span>Adventure &amp; Hills</span></div>
       </div>
     </div>
   </section>
@@ -879,6 +1568,49 @@
           <div class="cta-trust-chip"><span>&#10003;</span> 100% Free Travel Planning</div>
           <div class="cta-trust-chip"><span>&#10003;</span> Verified District Insights</div>
           <div class="cta-trust-chip"><span>&#10003;</span> Hackathon Ready Prototype</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MINI EARTH — PREMIUM FEATURE PROMO BANNER
+       ============================================================ -->
+  <section class="miniearth-promo" id="miniearth-promo">
+    <div class="me-promo-bg">
+      <div class="me-promo-star" style="top:15%;left:10%;animation-delay:0s;"></div>
+      <div class="me-promo-star" style="top:70%;left:20%;animation-delay:1.2s;"></div>
+      <div class="me-promo-star" style="top:30%;left:80%;animation-delay:0.6s;"></div>
+      <div class="me-promo-star" style="top:80%;left:75%;animation-delay:1.8s;"></div>
+      <div class="me-promo-star" style="top:50%;left:50%;animation-delay:0.9s;"></div>
+    </div>
+    <div class="container">
+      <div class="me-promo-content">
+        <div class="me-promo-globe-wrap">
+          <div class="me-promo-globe">🌍</div>
+        </div>
+        <div class="me-promo-text">
+          <div class="section-tag" style="color:#D5A746;">✦ New Premium Feature</div>
+          <h2 class="me-promo-title">Explore Odisha on a <span class="me-promo-highlight">3D Earth</span></h2>
+          <p class="me-promo-subtitle">
+            Start from outer space. Fly through Asia. Zoom into India. Land on Odisha.
+            Discover 31 curated destinations, district-by-district, on an interactive 3D globe.
+          </p>
+          <div class="me-promo-features">
+            <div class="me-promo-feat">🌐 Realistic 3D Blue Marble Earth</div>
+            <div class="me-promo-feat">✈️ Animated Earth → India → Odisha journey</div>
+            <div class="me-promo-feat">📍 31 clickable destination hotspots</div>
+            <div class="me-promo-feat">🎨 Category filters & district explorer</div>
+            <div class="me-promo-feat">☀️ Day / Night Earth texture toggle</div>
+            <div class="me-promo-feat">📱 Responsive desktop & mobile</div>
+          </div>
+          <a href="miniearth.html" class="btn btn-primary me-promo-btn" id="btn-launch-miniearth">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            Launch Mini Earth — 3D Globe
+          </a>
         </div>
       </div>
     </div>
