@@ -35,8 +35,8 @@
         <li><a href="#about" class="nav-link" id="nav-about">About</a></li>
         <li><a href="#contact" class="nav-link" id="nav-contact">Contact</a></li>
       </ul>
-      <a href="#destinations" class="btn btn-nav" id="btn-explore-now">Explore Now</a>
-      <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
+      <button type="button" class="btn btn-nav auth-button" id="login-btn">Continue with Google</button>
+      <button class="hamburger" id="hamburger-btn" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-nav-overlay">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
@@ -45,9 +45,9 @@
   </nav>
 
   <!-- Mobile Nav -->
-  <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+  <div class="mobile-nav-overlay" id="mobile-nav-overlay" aria-hidden="true" inert>
     <div class="mobile-nav" id="mobile-nav">
-      <button class="mobile-nav-close" id="mobile-nav-close">&#10005;</button>
+      <button class="mobile-nav-close" id="mobile-nav-close" type="button" aria-label="Close navigation">&#10005;</button>
       <div class="mobile-logo"><span class="logo-text">Odisha <span class="logo-accent">360</span></span></div>
       <ul class="mobile-nav-links">
         <li><a href="#home" class="mobile-nav-link" id="m-nav-home">Home</a></li>
@@ -57,7 +57,7 @@
         <li><a href="#about" class="mobile-nav-link" id="m-nav-about">About</a></li>
         <li><a href="#contact" class="mobile-nav-link" id="m-nav-contact">Contact</a></li>
       </ul>
-      <a href="#destinations" class="btn btn-primary mobile-cta" id="m-btn-explore">Explore Now</a>
+      <button type="button" class="btn btn-primary mobile-cta auth-button" id="mobile-login-btn">Continue with Google</button>
     </div>
   </div>
 
@@ -94,7 +94,7 @@
       <div class="hero-stats" id="hero-stats">
         <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="30">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Districts</span></div>
         <div class="stat-divider"></div>
-        <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="480">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Destinations</span></div>
+        <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="0">0</span><span class="stat-suffix"></span></div><span class="stat-label">Destinations</span></div>
         <div class="stat-divider"></div>
         <div class="stat-item"><div class="stat-top"><span class="stat-number" data-count="1500">0</span><span class="stat-suffix">+</span></div><span class="stat-label">Temples</span></div>
         <div class="stat-divider"></div>
@@ -114,15 +114,15 @@
     <div class="container">
       <div class="search-card" id="search-card">
         <div class="search-tabs" id="search-tabs">
-          <button class="search-tab active" id="tab-destinations" data-tab="destinations">
+          <button class="search-tab active" id="tab-destinations" data-tab="destinations" aria-selected="true">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Destinations
           </button>
-          <button class="search-tab" id="tab-hotels" data-tab="hotels">
+          <button class="search-tab" id="tab-hotels" data-tab="hotels" aria-selected="false">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
             Hotels
           </button>
-          <button class="search-tab" id="tab-experiences" data-tab="experiences">
+          <button class="search-tab" id="tab-experiences" data-tab="experiences" aria-selected="false">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>
             Experiences
           </button>
@@ -167,126 +167,23 @@
         <p class="section-subtitle">From ancient temples to pristine beaches, explore Odisha's most breathtaking places</p>
       </div>
       <div class="filter-bar" id="filter-bar">
-        <button class="filter-btn active" id="filter-all" data-filter="all">All</button>
-        <button class="filter-btn" id="filter-heritage" data-filter="heritage">Heritage</button>
-        <button class="filter-btn" id="filter-nature" data-filter="nature">Nature</button>
-        <button class="filter-btn" id="filter-beach" data-filter="beach">Beaches</button>
-        <button class="filter-btn" id="filter-spiritual" data-filter="spiritual">Spiritual</button>
-        <button class="filter-btn" id="filter-wildlife" data-filter="wildlife">Wildlife</button>
+        <button class="filter-btn active" id="filter-all" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" id="filter-heritage" data-filter="heritage" aria-pressed="false">Heritage</button>
+        <button class="filter-btn" id="filter-nature" data-filter="nature" aria-pressed="false">Nature</button>
+        <button class="filter-btn" id="filter-beach" data-filter="beach" aria-pressed="false">Beaches</button>
+        <button class="filter-btn" id="filter-spiritual" data-filter="spiritual" aria-pressed="false">Spiritual</button>
+        <button class="filter-btn" id="filter-wildlife" data-filter="wildlife" aria-pressed="false">Wildlife</button>
       </div>
-      <div class="destinations-grid" id="destinations-grid">
-
-        <div class="dest-card" id="card-konark" data-category="heritage">
-          <div class="dest-card-img-wrap">
-            <img src="assets/images/konark.jpg" alt="Konark Sun Temple" class="dest-card-img" loading="lazy" />
-            <div class="dest-card-overlay"></div>
-            <div class="dest-card-badge">UNESCO Heritage</div>
-            <button class="dest-card-fav" id="fav-konark" aria-label="Save Konark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          </div>
-          <div class="dest-card-body">
-            <div class="dest-card-meta">
-              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Puri District</span>
-              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.9</span>
-            </div>
-            <h3 class="dest-card-title">Konark Sun Temple</h3>
-            <p class="dest-card-desc">Marvel at the 13th century chariot-shaped temple, a masterpiece of Kalinga architecture and UNESCO World Heritage Site.</p>
-            <div class="dest-card-footer"><span class="dest-card-tag">Heritage</span><a href="#" class="dest-card-link" id="link-konark">Explore &rarr;</a></div>
-          </div>
-        </div>
-
-        <div class="dest-card" id="card-puri" data-category="beach spiritual">
-          <div class="dest-card-img-wrap">
-            <img src="assets/images/puri.jpg" alt="Puri Beach" class="dest-card-img" loading="lazy" />
-            <div class="dest-card-overlay"></div>
-            <div class="dest-card-badge">Sacred City</div>
-            <button class="dest-card-fav" id="fav-puri" aria-label="Save Puri"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          </div>
-          <div class="dest-card-body">
-            <div class="dest-card-meta">
-              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Puri District</span>
-              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.8</span>
-            </div>
-            <h3 class="dest-card-title">Puri &ndash; Sea &amp; Soul</h3>
-            <p class="dest-card-desc">Golden sands meet divine spirituality at the abode of Lord Jagannath. A sacred pilgrimage and glorious beach destination in one.</p>
-            <div class="dest-card-footer"><span class="dest-card-tag">Beach &amp; Spiritual</span><a href="#" class="dest-card-link" id="link-puri">Explore &rarr;</a></div>
-          </div>
-        </div>
-
-        <div class="dest-card" id="card-chilika" data-category="nature wildlife">
-          <div class="dest-card-img-wrap">
-            <img src="assets/images/chilika.jpg" alt="Chilika Lake" class="dest-card-img" loading="lazy" />
-            <div class="dest-card-overlay"></div>
-            <div class="dest-card-badge">Ramsar Site</div>
-            <button class="dest-card-fav" id="fav-chilika" aria-label="Save Chilika"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          </div>
-          <div class="dest-card-body">
-            <div class="dest-card-meta">
-              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Khurda &amp; Puri</span>
-              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.7</span>
-            </div>
-            <h3 class="dest-card-title">Chilika Lake</h3>
-            <p class="dest-card-desc">Asia's largest brackish water lagoon, home to rare Irrawaddy dolphins, migratory flamingos, and thousands of avian species.</p>
-            <div class="dest-card-footer"><span class="dest-card-tag">Nature &amp; Wildlife</span><a href="#" class="dest-card-link" id="link-chilika">Explore &rarr;</a></div>
-          </div>
-        </div>
-
-        <div class="dest-card" id="card-bhubaneswar" data-category="heritage spiritual">
-          <div class="dest-card-img-wrap">
-            <img src="assets/images/bhubaneswar.jpg" alt="Lingaraj Temple Bhubaneswar" class="dest-card-img" loading="lazy" />
-            <div class="dest-card-overlay"></div>
-            <div class="dest-card-badge">Temple City</div>
-            <button class="dest-card-fav" id="fav-bhubaneswar" aria-label="Save Bhubaneswar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          </div>
-          <div class="dest-card-body">
-            <div class="dest-card-meta">
-              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Khurda District</span>
-              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.8</span>
-            </div>
-            <h3 class="dest-card-title">Bhubaneswar</h3>
-            <p class="dest-card-desc">The City of Temples &mdash; home to the Lingaraj Temple, ancient Udayagiri caves, and over a thousand medieval temples.</p>
-            <div class="dest-card-footer"><span class="dest-card-tag">Heritage &amp; Spiritual</span><a href="#" class="dest-card-link" id="link-bhubaneswar">Explore &rarr;</a></div>
-          </div>
-        </div>
-
-        <div class="dest-card" id="card-simlipal" data-category="nature wildlife">
-          <div class="dest-card-img-wrap">
-            <img src="assets/images/simlipal.jpg" alt="Simlipal National Park" class="dest-card-img" loading="lazy" />
-            <div class="dest-card-overlay"></div>
-            <div class="dest-card-badge">Biosphere Reserve</div>
-            <button class="dest-card-fav" id="fav-simlipal" aria-label="Save Simlipal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          </div>
-          <div class="dest-card-body">
-            <div class="dest-card-meta">
-              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Mayurbhanj</span>
-              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.6</span>
-            </div>
-            <h3 class="dest-card-title">Simlipal National Park</h3>
-            <p class="dest-card-desc">A UNESCO Biosphere Reserve with Royal Bengal Tigers, wild elephants, hidden waterfalls and dense sal forests.</p>
-            <div class="dest-card-footer"><span class="dest-card-tag">Wildlife</span><a href="#" class="dest-card-link" id="link-simlipal">Explore &rarr;</a></div>
-          </div>
-        </div>
-
-        <div class="dest-card" id="card-daringbadi" data-category="nature">
-          <div class="dest-card-img-wrap">
-            <div class="dest-card-img-placeholder"><div class="placeholder-icon">&#127956;</div></div>
-            <div class="dest-card-overlay"></div>
-            <div class="dest-card-badge">Kashmir of Odisha</div>
-            <button class="dest-card-fav" id="fav-daringbadi" aria-label="Save Daringbadi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
-          </div>
-          <div class="dest-card-body">
-            <div class="dest-card-meta">
-              <span class="dest-card-location"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kandhamal</span>
-              <span class="dest-card-rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#D5A746" stroke="#D5A746" stroke-width="1"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/></svg>4.5</span>
-            </div>
-            <h3 class="dest-card-title">Daringbadi</h3>
-            <p class="dest-card-desc">Odisha's own hill station with misty valleys, coffee and pepper plantations, and frost in winter months.</p>
-            <div class="dest-card-footer"><span class="dest-card-tag">Nature</span><a href="#" class="dest-card-link" id="link-daringbadi">Explore &rarr;</a></div>
-          </div>
-        </div>
-
+      <div class="destination-search">
+        <label for="destination-query">Find a destination</label>
+        <input id="destination-query" type="search" placeholder="Search by place, district or experience" autocomplete="off" />
+        <label for="destination-district">District</label>
+        <select id="destination-district" aria-label="Filter destinations by district"><option value="">All districts</option></select>
+        <p id="destination-count" aria-live="polite"></p>
       </div>
+      <div class="destinations-grid" id="destinations-grid"></div>
       <div class="view-all-wrap">
-        <a href="#" class="btn btn-outline-dark" id="btn-view-all-destinations">View All Destinations</a>
+        <button type="button" class="btn btn-outline-dark" id="load-more-destinations">Load more destinations</button>
       </div>
     </div>
   </section>
@@ -299,30 +196,39 @@
         <h2 class="section-title section-title-light">Explore Odisha's Culture</h2>
         <p class="section-subtitle section-subtitle-light">A tapestry of art, dance, festivals and culinary traditions spanning millennia</p>
       </div>
+      <nav class="culture-tabs" id="culture-tabs" aria-label="Filter culture topics">
+        <button type="button" data-culture-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-culture-filter="Food" aria-pressed="false">Food</button>
+        <button type="button" data-culture-filter="Dance" aria-pressed="false">Dance</button>
+        <button type="button" data-culture-filter="Crafts" aria-pressed="false">Crafts</button>
+        <button type="button" data-culture-filter="Festivals" aria-pressed="false">Festivals</button>
+        <button type="button" data-culture-filter="Tribal Heritage" aria-pressed="false">Tribal Heritage</button>
+        <button type="button" data-culture-filter="Architecture" aria-pressed="false">Architecture</button>
+      </nav>
       <div class="culture-grid" id="culture-grid">
         <div class="culture-card" id="culture-dance">
           <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><path d="M12 2a3 3 0 0 1 3 3v1a3 3 0 0 1-3 3 3 3 0 0 1-3-3V5a3 3 0 0 1 3-3z"/><path d="M7 10l-2 5 4.5 2.5L12 22l2.5-4.5L19 15l-2-5"/></svg></div>
           <h3 class="culture-card-title">Odissi Dance</h3>
           <p class="culture-card-desc">One of India's classical dance forms with roots in temple traditions dating back 2,000 years. Known for sculpturesque poses and graceful movements.</p>
-          <a href="#" class="culture-link" id="link-odissi">Learn More &rarr;</a>
+          <a href="#culture" class="culture-link" id="link-odissi">Learn More &rarr;</a>
         </div>
         <div class="culture-card" id="culture-pattachitra">
           <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div>
           <h3 class="culture-card-title">Pattachitra Art</h3>
           <p class="culture-card-desc">Intricate cloth-based scroll paintings depicting mythological stories, renowned for rich colors, creative motifs, and fine brushwork.</p>
-          <a href="#" class="culture-link" id="link-pattachitra">Learn More &rarr;</a>
+          <a href="#culture" class="culture-link" id="link-pattachitra">Learn More &rarr;</a>
         </div>
         <div class="culture-card" id="culture-rath">
           <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><polygon points="12,2 22,20 2,20"/><line x1="12" y1="7" x2="12" y2="14"/><circle cx="12" cy="17" r="1"/></svg></div>
           <h3 class="culture-card-title">Rath Yatra</h3>
           <p class="culture-card-desc">The grand chariot festival of Lord Jagannath in Puri &mdash; a world-famous annual pilgrimage drawing millions of devotees every year.</p>
-          <a href="#" class="culture-link" id="link-rath-yatra">Learn More &rarr;</a>
+          <a href="#culture" class="culture-link" id="link-rath-yatra">Learn More &rarr;</a>
         </div>
         <div class="culture-card" id="culture-cuisine">
           <div class="culture-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D5A746" stroke-width="1.5"><path d="M6 2 L6 8 Q6 12 12 12 Q18 12 18 8 L18 2"/><line x1="12" y1="12" x2="12" y2="22"/></svg></div>
           <h3 class="culture-card-title">Odia Cuisine</h3>
           <p class="culture-card-desc">Savour the divine Mahaprasad of Puri, traditional Dalma, Chhena Poda and aromatic Pakhala &mdash; a culinary heritage unique to Odisha.</p>
-          <a href="#" class="culture-link" id="link-cuisine">Learn More &rarr;</a>
+          <a href="#culture" class="culture-link" id="link-cuisine">Learn More &rarr;</a>
         </div>
       </div>
     </div>
@@ -342,51 +248,91 @@
             <li class="planner-feature"><span class="feature-check">&#10003;</span>Budget-friendly accommodation suggestions</li>
             <li class="planner-feature"><span class="feature-check">&#10003;</span>Local food, transport and travel tips</li>
           </ul>
-          <a href="#" class="btn btn-primary" id="btn-start-planning">Start Planning Free</a>
+          <a href="#trip-planner" class="btn btn-primary" id="btn-start-planning">Start Planning Free</a>
         </div>
         <div class="planner-card-wrap" id="planner-card-wrap">
           <div class="planner-card" id="trip-planner-card">
             <h3 class="planner-card-title">Quick Trip Builder</h3>
-            <form class="planner-form" id="planner-form" onsubmit="handlePlannerForm(event)">
+            <form class="planner-form" id="planner-form">
               <div class="form-group">
                 <label for="trip-start" class="form-label">Starting From</label>
-                <input type="text" id="trip-start" class="form-input" placeholder="Your city / district" />
+                <input type="text" id="trip-start" class="form-input" placeholder="Your city / district" autocomplete="address-level2" minlength="2" maxlength="120" required />
               </div>
               <div class="form-group">
                 <label for="trip-duration" class="form-label">Trip Duration</label>
-                <select id="trip-duration" class="form-input">
+                <select id="trip-duration" class="form-input" required>
                   <option value="">Select duration</option>
-                  <option value="1">1 Day (Bhubaneswar)</option>
-                  <option value="3">3 Days (Golden Triangle)</option>
-                  <option value="5">5 Days (Best of Odisha)</option>
-                  <option value="7">7 Days (Complete Tour)</option>
-                  <option value="14">14 Days (Grand Odisha)</option>
+                  <option value="1">1 day</option><option value="2">2 days</option>
+                  <option value="3">3 days</option><option value="4">4 days</option>
+                  <option value="5">5 days</option><option value="6">6 days</option>
+                  <option value="7">7 days</option><option value="8">8 days</option>
+                  <option value="9">9 days</option><option value="10">10 days</option>
+                  <option value="11">11 days</option><option value="12">12 days</option>
+                  <option value="13">13 days</option><option value="14">14 days</option>
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label">Travel Style</label>
-                <div class="style-chips" id="style-chips">
-                  <button type="button" class="style-chip active" id="chip-cultural" data-style="cultural">Cultural</button>
-                  <button type="button" class="style-chip" id="chip-adventure" data-style="adventure">Adventure</button>
-                  <button type="button" class="style-chip" id="chip-spiritual" data-style="spiritual">Spiritual</button>
-                  <button type="button" class="style-chip" id="chip-nature" data-style="nature">Nature</button>
-                  <button type="button" class="style-chip" id="chip-beach" data-style="beach">Beach</button>
-                </div>
+                <label for="trip-style" class="form-label">Travel Style</label>
+                <select id="trip-style" class="form-input" required>
+                  <option value="cultural">Culture &amp; heritage</option>
+                  <option value="adventure">Adventure &amp; wildlife</option>
+                  <option value="spiritual">Spiritual</option>
+                  <option value="nature">Nature</option>
+                  <option value="beach">Beach</option>
+                  <option value="mixed">A little of everything</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="trip-budget" class="form-label">Budget Range</label>
-                <select id="trip-budget" class="form-input">
+                <select id="trip-budget" class="form-input" required>
                   <option value="">Select budget</option>
                   <option value="budget">Budget Friendly (Rs.1,000-3,000/day)</option>
                   <option value="mid">Mid Range (Rs.3,000-8,000/day)</option>
                   <option value="luxury">Premium (Rs.8,000+ /day)</option>
                 </select>
               </div>
+              <div class="form-group">
+                <label for="trip-preferences" class="form-label">Preferred places (optional)</label>
+                <select id="trip-preferences" class="form-input" multiple size="4" aria-describedby="trip-preferences-help"></select>
+                <small id="trip-preferences-help">Choose one or more places; hold Ctrl or Command to select several.</small>
+              </div>
               <button type="submit" class="btn btn-primary btn-full" id="btn-generate-plan">Generate My Itinerary</button>
+              <p class="planner-status" id="planner-status" role="status" aria-live="polite" hidden></p>
             </form>
           </div>
         </div>
       </div>
+      <section class="itinerary-result" id="itinerary-result" aria-live="polite" hidden>
+        <div class="itinerary-result-header">
+          <div><p class="section-tag">Your route</p><h3 id="itinerary-title">Your Odisha itinerary</h3></div>
+          <div class="itinerary-actions">
+            <button type="button" class="btn btn-outline-dark" id="save-itinerary">Save itinerary</button>
+            <button type="button" class="btn btn-primary" id="print-itinerary">Print / PDF</button>
+          </div>
+        </div>
+        <p class="itinerary-summary" id="itinerary-summary"></p>
+        <div class="itinerary-days" id="itinerary-days"></div>
+        <div class="itinerary-budget" id="itinerary-budget"></div>
+        <p class="budget-disclaimer">Planning estimates per traveller; actual fares, entry charges and accommodation rates vary. Verify permits, seasonal closures and current fees before travel.</p>
+      </section>
+    </div>
+  </section>
+
+  <!-- Weather and clothing guidance is populated from the canonical destination list. -->
+  <section class="assistance-section" id="assistance">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Weather-aware travel tips</div>
+        <h2 class="section-title">Assistance</h2>
+        <p class="section-subtitle">Choose a place for current conditions, a short forecast and practical packing advice.</p>
+      </div>
+      <form id="assistance-form" class="assistance-form">
+        <label for="assistance-place">Destination</label>
+        <input id="assistance-place" list="assistance-destinations" autocomplete="off" placeholder="Start typing any Odisha destination" required />
+        <datalist id="assistance-destinations"></datalist>
+        <button class="btn btn-primary" type="submit">Check conditions</button>
+      </form>
+      <div id="assistance-result" class="assistance-result" role="status" aria-live="polite"></div>
     </div>
   </section>
 
@@ -489,25 +435,43 @@
           <a href="#home" class="nav-logo footer-logo"><div class="logo-icon"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="14" stroke="#D5A746" stroke-width="2"/><path d="M8 16 Q16 6 24 16 Q16 26 8 16Z" fill="#D5A746" opacity="0.8"/><circle cx="16" cy="16" r="3" fill="#D5A746"/></svg></div><span class="logo-text">Odisha <span class="logo-accent">360</span></span></a>
           <p class="footer-tagline">Your complete travel companion for exploring the magnificent state of Odisha &mdash; where history, nature and spirituality converge.</p>
           <div class="footer-social" id="footer-social">
-            <a href="#" class="social-btn" id="social-instagram" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-            <a href="#" class="social-btn" id="social-facebook" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="#" class="social-btn" id="social-youtube" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></a>
-            <a href="#" class="social-btn" id="social-twitter" aria-label="Twitter X"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03A12.84 12.84 0 0 1 2 1.64a4.52 4.52 0 0 0 1.4 6.04 4.5 4.5 0 0 1-2.05-.56v.06c0 2.19 1.56 4.02 3.63 4.43a4.52 4.52 0 0 1-2.04.08 4.52 4.52 0 0 0 4.22 3.14A9.07 9.07 0 0 1 1 19.54a12.82 12.82 0 0 0 6.95 2.04c8.34 0 12.9-6.91 12.9-12.9 0-.2 0-.39-.01-.58A9.22 9.22 0 0 0 23 3z"/></svg></a>
+            <a href="https://www.instagram.com" target="_blank" rel="noreferrer" class="social-btn" id="social-instagram" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer" class="social-btn" id="social-facebook" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" class="social-btn" id="social-youtube" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02"/></svg></a>
+            <a href="https://x.com" target="_blank" rel="noreferrer" class="social-btn" id="social-twitter" aria-label="Twitter X"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 16.11 0c-2.5 0-4.52 2.02-4.52 4.52 0 .35.04.7.11 1.03A12.84 12.84 0 0 1 2 1.64a4.52 4.52 0 0 0 1.4 6.04 4.5 4.5 0 0 1-2.05-.56v.06c0 2.19 1.56 4.02 3.63 4.43a4.52 4.52 0 0 1-2.04.08 4.52 4.52 0 0 0 4.22 3.14A9.07 9.07 0 0 1 1 19.54a12.82 12.82 0 0 0 6.95 2.04c8.34 0 12.9-6.91 12.9-12.9 0-.2 0-.39-.01-.58A9.22 9.22 0 0 0 23 3z"/></svg></a>
           </div>
         </div>
-        <div class="footer-col" id="footer-explore-col"><h4 class="footer-col-title">Explore</h4><ul class="footer-links"><li><a href="#" class="footer-link" id="fl-destinations">Destinations</a></li><li><a href="#" class="footer-link" id="fl-heritage">Heritage Sites</a></li><li><a href="#" class="footer-link" id="fl-beaches">Beaches</a></li><li><a href="#" class="footer-link" id="fl-wildlife">Wildlife Parks</a></li><li><a href="#" class="footer-link" id="fl-tribal">Tribal Tourism</a></li></ul></div>
-        <div class="footer-col" id="footer-plan-col"><h4 class="footer-col-title">Plan</h4><ul class="footer-links"><li><a href="#" class="footer-link" id="fl-planner">Trip Planner</a></li><li><a href="#" class="footer-link" id="fl-itineraries">Itineraries</a></li><li><a href="#" class="footer-link" id="fl-hotels">Hotels</a></li><li><a href="#" class="footer-link" id="fl-transport">Transport</a></li><li><a href="#" class="footer-link" id="fl-guide">Travel Guide</a></li></ul></div>
-        <div class="footer-col" id="footer-info-col"><h4 class="footer-col-title">Information</h4><ul class="footer-links"><li><a href="#" class="footer-link" id="fl-about">About Us</a></li><li><a href="#" class="footer-link" id="fl-blog">Blog</a></li><li><a href="#" class="footer-link" id="fl-faq">FAQ</a></li><li><a href="#contact" class="footer-link" id="fl-contact">Contact</a></li><li><a href="#" class="footer-link" id="fl-privacy">Privacy Policy</a></li></ul></div>
+        <div class="footer-col" id="footer-explore-col"><h4 class="footer-col-title">Explore</h4><ul class="footer-links"><li><a href="#destinations" class="footer-link" id="fl-destinations">Destinations</a></li><li><a href="#destinations" class="footer-link" id="fl-heritage">Heritage Sites</a></li><li><a href="#destinations" class="footer-link" id="fl-beaches">Beaches</a></li><li><a href="#destinations" class="footer-link" id="fl-wildlife">Wildlife Parks</a></li><li><a href="#culture" class="footer-link" id="fl-tribal">Tribal Tourism</a></li></ul></div>
+        <div class="footer-col" id="footer-plan-col"><h4 class="footer-col-title">Plan</h4><ul class="footer-links"><li><a href="#trip-planner" class="footer-link" id="fl-planner">Trip Planner</a></li><li><a href="#trip-planner" class="footer-link" id="fl-itineraries">Itineraries</a></li><li><a href="#trip-planner" class="footer-link" id="fl-hotels">Hotels</a></li><li><a href="#trip-planner" class="footer-link" id="fl-transport">Transport</a></li><li><a href="#about" class="footer-link" id="fl-guide">Travel Guide</a></li></ul></div>
+        <div class="footer-col" id="footer-info-col"><h4 class="footer-col-title">Information</h4><ul class="footer-links"><li><a href="#about" class="footer-link" id="fl-about">About Us</a></li><li><a href="#about" class="footer-link" id="fl-blog">Blog</a></li><li><a href="#about" class="footer-link" id="fl-faq">FAQ</a></li><li><a href="#contact" class="footer-link" id="fl-contact">Contact</a></li><li><a href="#about" class="footer-link" id="fl-privacy">Privacy Policy</a></li></ul></div>
       </div>
       <div class="footer-bottom" id="footer-bottom">
         <p class="footer-copy">&copy; 2026 Odisha 360. Made with &hearts; for Odisha.</p>
         <p class="footer-credits">Designed for national-level innovation &amp; tourism excellence.</p>
       </div>
+      <section class="image-credit-section" aria-labelledby="image-credit-title">
+        <h2 id="image-credit-title">Image credits</h2>
+        <ul id="image-credits-list"></ul>
+      </section>
     </div>
   </footer>
 
   <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
-  <div class="toast" id="toast"></div>
+  <button class="assistance-chat-toggle" id="assistance-chat-toggle" type="button" aria-label="Open travel assistance"><i data-lucide="cloud-sun" aria-hidden="true"></i><span>Travel help</span></button>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog class="content-modal" id="content-modal" aria-labelledby="modal-title">
+    <button class="modal-close" type="button" aria-label="Close dialog" data-close-modal>&times;</button>
+    <div id="modal-content"></div>
+  </dialog>
+  <script src="destinations.js"></script>
+  <script id="lucide-script" src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" async></script>
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
   <script src="script.js"></script>
+  <script src="site-upgrades.js"></script>
+  <script src="culture.js"></script>
+  <script src="culture-upgrades.js"></script>
+  <script src="photo-credits.js"></script>
 </body>
 </html>

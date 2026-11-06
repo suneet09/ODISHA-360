@@ -1,8 +1,6 @@
-/* ============================================================
-   ODISHA 360 - Main JavaScript
-   ============================================================ */
-
 "use strict";
+
+const supabaseClient = window.odisha360Auth?.client || null;
 
 // ─── NAVBAR ─────────────────────────────────────────────────────────────────
 const navbar = document.getElementById("navbar");
@@ -23,6 +21,8 @@ hamburgerBtn.addEventListener("click", () => {
   const isOpen = hamburgerBtn.classList.toggle("active");
   hamburgerBtn.setAttribute("aria-expanded", isOpen);
   mobileNavOverlay.classList.toggle("active", isOpen);
+  mobileNavOverlay.setAttribute("aria-hidden", String(!isOpen));
+  mobileNavOverlay.inert = !isOpen;
   document.body.style.overflow = isOpen ? "hidden" : "";
 });
 
@@ -36,6 +36,8 @@ function closeMobileNav() {
   hamburgerBtn.classList.remove("active");
   hamburgerBtn.setAttribute("aria-expanded", "false");
   mobileNavOverlay.classList.remove("active");
+  mobileNavOverlay.setAttribute("aria-hidden", "true");
+  mobileNavOverlay.inert = true;
   document.body.style.overflow = "";
 }
 
@@ -107,44 +109,44 @@ if (heroStats) {
 }
 
 // ─── SEARCH AUTOCOMPLETE ──────────────────────────────────────────────────────
-const DESTINATIONS = [
-  "Konark Sun Temple", "Puri Beach", "Chilika Lake", "Bhubaneswar",
-  "Simlipal National Park", "Daringbadi", "Rath Yatra – Puri", "Lingaraj Temple",
-  "Udayagiri Caves", "Dhauli Peace Pagoda", "Ratnagiri Buddhist Site",
-  "Bhitarkanika Mangroves", "Gopalpur-on-Sea", "Satkosia Tiger Reserve",
-  "Hirakud Dam", "Odissi Dance Festival", "Pattachitra Village Raghurajpur",
-  "Tikarpada Wildlife Sanctuary", "Gandhamardan Hills", "Sambalpur"
-];
+const DESTINATIONS = (window.ODISHA_DESTINATIONS || []).map(destination => destination.name);
 
 const searchWhere = document.getElementById("search-where");
 const searchSuggestions = document.getElementById("search-suggestions");
 
 if (searchWhere && searchSuggestions) {
-  searchWhere.addEventListener("input", () => {
-    const query = searchWhere.value.trim().toLowerCase();
-    searchSuggestions.innerHTML = "";
-    if (query.length < 2) {
-      searchSuggestions.classList.remove("show");
-      return;
-    }
-    const matches = DESTINATIONS.filter(d => d.toLowerCase().includes(query));
-    if (!matches.length) {
-      searchSuggestions.classList.remove("show");
-      return;
-    }
+  let searchTimer;
+
+  function renderSearchSuggestions(matches) {
+    searchSuggestions.replaceChildren();
     matches.slice(0, 6).forEach(dest => {
-      const item = document.createElement("div");
+      const item = document.createElement("button");
+      item.type = "button";
       item.className = "suggestion-item";
       item.setAttribute("role", "option");
-      item.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${dest}`;
+      item.textContent = dest;
       item.addEventListener("click", () => {
         searchWhere.value = dest;
         searchSuggestions.classList.remove("show");
         searchWhere.focus();
+        document.getElementById("destination-query").value = dest;
+        document.getElementById("destinations").scrollIntoView({ behavior: "smooth" });
       });
       searchSuggestions.appendChild(item);
     });
-    searchSuggestions.classList.add("show");
+    searchSuggestions.classList.toggle("show", matches.length > 0);
+  }
+
+  searchWhere.addEventListener("input", () => {
+    const query = searchWhere.value.trim().toLowerCase();
+    clearTimeout(searchTimer);
+    if (query.length < 2) {
+      searchSuggestions.classList.remove("show");
+      return;
+    }
+    searchTimer = setTimeout(() => {
+      renderSearchSuggestions(DESTINATIONS.filter(destination => destination.toLowerCase().includes(query)));
+    }, 120);
   });
 
   // Keyboard: Escape closes suggestions
@@ -161,14 +163,21 @@ if (searchWhere && searchSuggestions) {
 
 // Search tabs
 const searchTabs = document.querySelectorAll(".search-tab");
+let activeSearchTab = "destinations";
 searchTabs.forEach(tab => {
   tab.addEventListener("click", () => {
+    activeSearchTab = tab.dataset.tab || "destinations";
     searchTabs.forEach(t => {
       t.classList.remove("active");
       t.setAttribute("aria-selected", "false");
     });
     tab.classList.add("active");
     tab.setAttribute("aria-selected", "true");
+    searchWhere.placeholder = activeSearchTab === "hotels"
+      ? "Search stays near a destination"
+      : activeSearchTab === "experiences"
+        ? "Search culture, food or experiences"
+        : "Where do you want to go?";
   });
 });
 
@@ -181,82 +190,550 @@ function handleSearch(e) {
     showToast("Please enter a destination to search!");
     return;
   }
+  if (activeSearchTab === "hotels") {
+    showToast("Hotel search and booking are not connected yet. Use the trip planner for estimated stay costs.");
+    return;
+  }
+  if (activeSearchTab === "experiences") {
+    const queryText = where.toLowerCase();
+    const matches = (window.ODISHA_CULTURE || []).filter(topic =>
+      [topic.title, topic.summary, topic.history, topic.significance, topic.experience]
+        .join(" ").toLowerCase().includes(queryText));
+    if (!matches.length) {
+      showToast(`No culture or experience guide matched "${where}". Try dance, food, festival or temple.`);
+      return;
+    }
+    document.getElementById("culture").scrollIntoView({ behavior: "smooth" });
+    openCultureDetails(matches[0].id);
+    return;
+  }
   const dateStr = when ? new Date(when).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "any date";
-  showToast(`Searching "${where}" for ${travellers} traveller(s) on ${dateStr}`);
+  const query = document.getElementById("destination-query");
+  query.value = where;
+  query.dispatchEvent(new Event("input", { bubbles: true }));
+  document.getElementById("destinations").scrollIntoView({ behavior: "smooth" });
+  showToast(`Showing matches for "${where}" · ${travellers} traveller(s) · ${dateStr}`);
 }
 
-// ─── DESTINATION FILTER ───────────────────────────────────────────────────────
-const filterBtns = document.querySelectorAll(".filter-btn");
-const destCards = document.querySelectorAll(".dest-card");
+// ─── DESTINATIONS, DETAILS, FAVOURITES ────────────────────────────────────────
+const destinationGrid = document.getElementById("destinations-grid");
+const destinationFilterButtons = [...document.querySelectorAll(".filter-btn")];
+const destinationSearchInput = document.getElementById("destination-query");
+const destinationCount = document.getElementById("destination-count");
+const destinations = window.ODISHA_DESTINATIONS || [];
+const AVAILABLE_DESTINATION_PHOTOS = new Set(["puri", "konark", "bhubaneswar", "chilika", "simlipal"]);
+function destinationPhoto(destination) {
+  return AVAILABLE_DESTINATION_PHOTOS.has(destination.id)
+    ? destination.image : "assets/images/odisha-placeholder.svg";
+}
+let currentDestinationFilter = "all";
+let favouriteIds = readStoredList("odisha360:favourites");
+const pendingTripDestinationIds = new Set();
 
-filterBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterBtns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const filter = btn.dataset.filter;
+function readStoredList(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key) || "[]");
+    return Array.isArray(value) ? value : [];
+  } catch (error) {
+    console.error(`Could not read ${key} from local storage:`, error);
+    return [];
+  }
+}
 
-    destCards.forEach(card => {
-      const categories = (card.dataset.category || "").toLowerCase();
-      const show = filter === "all" || categories.includes(filter);
+function writeStoredList(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    console.error(`Could not write ${key} to local storage:`, error);
+    return false;
+  }
+}
 
-      if (show) {
-        card.classList.remove("hidden");
-        // Reset then trigger animation
-        card.style.animation = "none";
-        // Use double rAF to guarantee repaint before animation
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            card.style.animation = "card-pop-in 0.4s ease both";
-          });
-        });
-      } else {
-        card.classList.add("hidden");
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[character]);
+}
+
+function refreshIcons() {
+  if (window.lucide?.createIcons) {
+    window.lucide.createIcons();
+  }
+}
+
+if (!window.lucide) {
+  document.getElementById("lucide-script")?.addEventListener("load", refreshIcons, { once: true });
+}
+
+function destinationMatches(destination, filter, query) {
+  const categories = [destination.category, ...destination.tags].map(value => value.toLowerCase());
+  const matchesFilter = filter === "all" || categories.includes(filter);
+  const text = [
+    destination.name, destination.district, destination.category,
+    destination.tags.join(" "), destination.description
+  ].join(" ").toLowerCase();
+  return matchesFilter && (!query || text.includes(query));
+}
+
+function renderDestinations() {
+  if (!destinationGrid) return;
+  const query = destinationSearchInput.value.trim().toLowerCase();
+  const filtered = destinations.filter(destination =>
+    destinationMatches(destination, currentDestinationFilter, query));
+
+  destinationGrid.replaceChildren();
+  filtered.forEach(destination => {
+    const card = document.createElement("article");
+    const isIllustration = destination.image.endsWith("odisha-placeholder.svg");
+    card.className = "dest-card reveal-on-scroll revealed";
+    card.dataset.destinationId = destination.id;
+    card.dataset.category = [destination.category, ...destination.tags].join(" ").toLowerCase();
+    card.innerHTML = `
+      <div class="dest-card-img-wrap">
+      <img class="dest-card-img" src="${escapeHTML(destinationPhoto(destination))}"
+          alt="${escapeHTML(AVAILABLE_DESTINATION_PHOTOS.has(destination.id) ? `${destination.name}, ${destination.district} district` : `Generic placeholder; a destination photo for ${destination.name} is not yet available`)}"
+          loading="lazy" />
+        <div class="dest-card-overlay"></div>
+        <span class="dest-card-badge">${escapeHTML(destination.category)}</span>
+        <button class="dest-card-fav${favouriteIds.includes(destination.id) ? " saved" : ""}"
+          type="button" aria-label="${favouriteIds.includes(destination.id) ? "Remove" : "Add"} ${escapeHTML(destination.name)} ${favouriteIds.includes(destination.id) ? "from" : "to"} favourites"
+          aria-pressed="${favouriteIds.includes(destination.id)}" data-favourite="${escapeHTML(destination.id)}">
+          <i data-lucide="heart" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="dest-card-body">
+        <div class="dest-card-meta">
+          <span class="dest-card-location"><i data-lucide="map-pin" aria-hidden="true"></i>${escapeHTML(destination.district)} district</span>
+          <span class="dest-card-category">${escapeHTML(destination.category)}</span>
+        </div>
+        <h3 class="dest-card-title">${escapeHTML(destination.name)}</h3>
+        <p class="dest-card-desc">${escapeHTML(destination.description)}</p>
+        <div class="dest-card-footer">
+          <span class="dest-card-tag">${escapeHTML(destination.tags.join(" · "))}</span>
+          <button type="button" class="dest-card-link" data-destination-details="${escapeHTML(destination.id)}">View details <span aria-hidden="true">→</span></button>
+        </div>
+      </div>`;
+    const image = card.querySelector("img");
+    image.addEventListener("error", () => {
+      if (!image.src.endsWith("/odisha-placeholder.svg")) {
+        image.src = "assets/images/odisha-placeholder.svg";
+        image.alt = `Illustrated landscape placeholder for ${destination.name}`;
+      }
+    }, { once: true });
+    destinationGrid.appendChild(card);
+  });
+  destinationCount.textContent = `${filtered.length} of ${destinations.length} destinations`;
+  destinationGrid.classList.add("ready");
+  refreshIcons();
+}
+
+destinationGrid?.addEventListener("click", event => {
+  const favouriteButton = event.target.closest("[data-favourite]");
+  if (favouriteButton) {
+    const id = favouriteButton.dataset.favourite;
+    const destination = destinations.find(item => item.id === id);
+    favouriteIds = favouriteIds.includes(id)
+      ? favouriteIds.filter(favouriteId => favouriteId !== id)
+      : [...favouriteIds, id];
+    if (!writeStoredList("odisha360:favourites", favouriteIds)) {
+      showToast("Could not save favourites in this browser.");
+      return;
+    }
+    renderDestinations();
+    syncFavourite(id, favouriteIds.includes(id));
+    showToast(`${destination.name} ${favouriteIds.includes(id) ? "added to" : "removed from"} favourites.`);
+    return;
+  }
+  const detailsButton = event.target.closest("[data-destination-details]");
+  if (detailsButton) openDestinationDetails(detailsButton.dataset.destinationDetails);
+});
+
+destinationFilterButtons.forEach(button => button.addEventListener("click", () => {
+  currentDestinationFilter = button.dataset.filter;
+  destinationFilterButtons.forEach(item => {
+    const selected = item === button;
+    item.classList.toggle("active", selected);
+    item.setAttribute("aria-pressed", String(selected));
+  });
+  renderDestinations();
+}));
+destinationSearchInput?.addEventListener("input", renderDestinations);
+
+async function syncFavourite(destinationId, isSaved) {
+  if (!supabaseClient) return;
+  try {
+    const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+    if (sessionError) throw sessionError;
+    const userId = sessionData.session?.user?.id;
+    if (!userId) return;
+    const query = supabaseClient.from("favorites");
+    const result = isSaved
+      ? await query.upsert({ user_id: userId, destination_id: destinationId }, { onConflict: "user_id,destination_id" })
+      : await query.delete().eq("user_id", userId).eq("destination_id", destinationId);
+    if (result.error) throw result.error;
+  } catch (error) {
+    console.error("Could not sync favourite with Supabase:", error);
+    showToast("Favourite saved on this device; cloud sync failed.");
+  }
+}
+
+const contentModal = document.getElementById("content-modal");
+const modalContent = document.getElementById("modal-content");
+
+function showModal(content) {
+  modalContent.replaceChildren(content);
+  contentModal.showModal();
+  refreshIcons();
+}
+
+function openDestinationDetails(id) {
+  const destination = destinations.find(item => item.id === id);
+  if (!destination) return;
+  const article = document.createElement("article");
+  article.className = "modal-article";
+  article.innerHTML = `
+    <img class="modal-hero" src="${escapeHTML(destinationPhoto(destination))}" alt="${escapeHTML(AVAILABLE_DESTINATION_PHOTOS.has(destination.id) ? destination.name : `Generic placeholder; a destination photo for ${destination.name} is not yet available`)}" />
+    <p class="section-tag">${escapeHTML(destination.category)} · ${escapeHTML(destination.district)}</p>
+    <h2 id="modal-title">${escapeHTML(destination.name)}</h2>
+    <p>${escapeHTML(destination.description)}</p>
+    <dl class="destination-facts">
+      <div><dt>Best season</dt><dd>${escapeHTML(destination.bestSeason)}</dd></div>
+      <div><dt>Entry fees</dt><dd>${escapeHTML(destination.entryFeeLabel)}</dd></div>
+      <div><dt>Estimated daily cost</dt><dd>Budget ₹${destination.avgDailyCost.budget.toLocaleString("en-IN")} · Mid ₹${destination.avgDailyCost.mid.toLocaleString("en-IN")} · Premium ₹${destination.avgDailyCost.luxury.toLocaleString("en-IN")}</dd></div>
+    </dl>
+    <h3>Top attractions</h3><ul>${destination.attractions.map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ul>
+    <h3>Try locally</h3><p>${destination.localFood.map(escapeHTML).join(" · ")}</p>
+    <div class="modal-actions">
+      <a class="btn btn-outline-dark" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${destination.name}, Odisha`)}" target="_blank" rel="noopener noreferrer">Open map</a>
+      <button class="btn btn-primary" type="button" data-add-to-trip="${escapeHTML(destination.id)}">Add to my trip</button>
+    </div>`;
+  const image = article.querySelector("img");
+  image.addEventListener("error", () => {
+    image.src = "assets/images/odisha-placeholder.svg";
+    image.alt = `Illustrated landscape placeholder for ${destination.name}`;
+  }, { once: true });
+  showModal(article);
+}
+
+modalContent.addEventListener("click", event => {
+  const addButton = event.target.closest("[data-add-to-trip]");
+  if (!addButton) return;
+  const destination = destinations.find(item => item.id === addButton.dataset.addToTrip);
+  pendingTripDestinationIds.add(destination.id);
+  document.getElementById("trip-start").value ||= destination.district;
+  document.getElementById("trip-style").value = ({
+    Heritage: "cultural", Spiritual: "spiritual", Beach: "beach",
+    Nature: "nature", Wildlife: "adventure"
+  })[destination.category] || "mixed";
+  contentModal.close();
+  document.getElementById("trip-planner").scrollIntoView({ behavior: "smooth" });
+  showToast(`${destination.name} added to your itinerary preferences.`);
+});
+
+document.querySelector("[data-close-modal]")?.addEventListener("click", () => contentModal.close());
+contentModal?.addEventListener("click", event => {
+  if (event.target === contentModal) contentModal.close();
+});
+
+// ─── CULTURE DETAILS ─────────────────────────────────────────────────────────
+const cultureGrid = document.getElementById("culture-grid");
+const cultureTopics = window.ODISHA_CULTURE || [];
+
+function renderCultureCards() {
+  if (!cultureGrid) return;
+  cultureGrid.replaceChildren();
+  cultureTopics.forEach(topic => {
+    const card = document.createElement("article");
+    card.className = "culture-card reveal-on-scroll revealed";
+    card.innerHTML = `
+      <div class="culture-icon"><i data-lucide="${escapeHTML(topic.icon)}" aria-hidden="true"></i></div>
+      <h3 class="culture-card-title">${escapeHTML(topic.title)}</h3>
+      <p class="culture-card-desc">${escapeHTML(topic.summary)}</p>
+      <button class="culture-link" type="button" data-culture-details="${escapeHTML(topic.id)}">Explore the story <span aria-hidden="true">→</span></button>`;
+    cultureGrid.appendChild(card);
+  });
+  cultureGrid.classList.add("ready");
+  refreshIcons();
+}
+
+renderCultureCards();
+renderDestinations();
+
+// ─── TRIP PLANNER ────────────────────────────────────────────────────────────
+const plannerForm = document.getElementById("planner-form");
+const plannerStatus = document.getElementById("planner-status");
+const itineraryResult = document.getElementById("itinerary-result");
+let currentItinerary = null;
+const STYLE_CATEGORIES = {
+  cultural: ["heritage"], adventure: ["wildlife", "nature"],
+  spiritual: ["spiritual"], nature: ["nature", "wildlife"],
+  beach: ["beach"], mixed: []
+};
+
+function getCoordinates(name) {
+  const key = name.toLowerCase().replace(/ district$/, "").trim();
+  const place = destinations.find(destination =>
+    destination.id === key || destination.name.toLowerCase() === key);
+  if (place) return [place.lat, place.lng];
+  const districtPlace = destinations.find(destination => destination.district.toLowerCase().split(/,\s*/).includes(key));
+  if (districtPlace) return [districtPlace.lat, districtPlace.lng];
+  const fallback = destinations.find(destination => destination.id === "bhubaneswar") || destinations[0];
+  return [fallback.lat, fallback.lng];
+}
+
+function isKnownStartingPoint(name) {
+  const key = name.toLowerCase().replace(/ district$/, "").trim();
+  return destinations.some(destination => destination.id === key || destination.name.toLowerCase() === key
+    || destination.district.toLowerCase().split(/,\s*/).includes(key));
+}
+
+function distanceKm(from, to) {
+  const radians = degree => degree * Math.PI / 180;
+  const [lat1, lon1] = from;
+  const [lat2, lon2] = to;
+  const dLat = radians(lat2 - lat1);
+  const dLon = radians(lon2 - lon1);
+  const value = Math.sin(dLat / 2) ** 2
+    + Math.cos(radians(lat1)) * Math.cos(radians(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(value), Math.sqrt(1 - value));
+}
+
+function createRoute(start, duration, style) {
+  const preferred = STYLE_CATEGORIES[style] || [];
+  const startCoords = getCoordinates(start);
+  const selectedIds = new Set([...pendingTripDestinationIds,
+    ...[...(document.getElementById("trip-preferences")?.selectedOptions || [])].map(option => option.value)]);
+  const pinnedDestinations = destinations.filter(item => selectedIds.has(item.id));
+  const preferredDestinations = destinations.filter(item =>
+    !pinnedDestinations.includes(item)
+    && preferred.some(category => [item.category, ...item.tags].some(tag => tag.toLowerCase() === category)));
+  const firstGroup = pinnedDestinations.length
+    ? pinnedDestinations
+    : preferred.length ? preferredDestinations : destinations;
+  const remainingDestinations = destinations.filter(item => !firstGroup.includes(item));
+  let candidates = [...firstGroup];
+  let current = startCoords;
+  const route = [];
+
+  while (route.length < duration && (candidates.length || remainingDestinations.length)) {
+    if (!candidates.length && remainingDestinations.length) {
+      candidates = [...remainingDestinations];
+      remainingDestinations.length = 0;
+    }
+    let bestIndex = 0;
+    let bestDistance = Infinity;
+    candidates.forEach((destination, index) => {
+      const distance = distanceKm(current, [destination.lat, destination.lng]);
+      const score = distance;
+      if (score < bestDistance) {
+        bestDistance = score;
+        bestIndex = index;
       }
     });
+    const [destination] = candidates.splice(bestIndex, 1);
+    const distance = distanceKm(current, [destination.lat, destination.lng]);
+    const estimatedRoadDistance = Math.round(distance * 1.25);
+    route.push({
+      ...destination,
+      travelDistanceKm: estimatedRoadDistance,
+      travelTimeHours: Math.max(0.5, Math.round(estimatedRoadDistance / 45 * 2) / 2)
+    });
+    current = [destination.lat, destination.lng];
+  }
+  return route;
+}
+
+function buildItinerary({ start, duration, style, budget }) {
+  const route = createRoute(start, duration, style);
+  const travelRates = { budget: 8, mid: 13, luxury: 24 };
+  const days = route.map((destination, index) => {
+    const attractions = destination.attractions;
+    return {
+      day: index + 1,
+      destinationId: destination.id,
+      destination: destination.name,
+      district: destination.district,
+      description: destination.description,
+      travelDistanceKm: destination.travelDistanceKm,
+      travelTimeHours: destination.travelTimeHours,
+      travelFrom: index === 0
+        ? (isKnownStartingPoint(start) ? start : `Bhubaneswar-area estimate for ${start}`)
+        : route[index - 1].name,
+      morning: index === 0
+        ? `Travel from ${isKnownStartingPoint(start) ? start : "the Bhubaneswar area (approximate start)"} (about ${destination.travelTimeHours} hr / ${destination.travelDistanceKm} km by road), then visit ${attractions[0]}.`
+        : `Travel from ${route[index - 1].name} (about ${destination.travelTimeHours} hr / ${destination.travelDistanceKm} km by road), then visit ${attractions[0]}.`,
+      afternoon: `Explore ${attractions[1]}. Allow time for a relaxed lunch and local transport.`,
+      evening: `Visit ${attractions[2]}; check local opening times and sunset conditions.`,
+      food: destination.localFood,
+      bestSeason: destination.bestSeason,
+      entryFeeLabel: destination.entryFeeLabel,
+      entryCost: destination.entryFee,
+      dailyCost: destination.avgDailyCost[budget],
+      travelCost: Math.round(destination.travelDistanceKm * travelRates[budget]),
+      totalDayCost: Math.round(destination.avgDailyCost[budget] * 0.5)
+        + Math.round(destination.avgDailyCost[budget] * 0.25) * 2
+        + Math.round(destination.travelDistanceKm * travelRates[budget]) + destination.entryFee
+    };
   });
-});
+  const totals = days.reduce((sum, day) => ({
+    stay: sum.stay + Math.round(day.dailyCost * 0.5),
+    food: sum.food + Math.round(day.dailyCost * 0.25),
+    localTransport: sum.localTransport + Math.round(day.dailyCost * 0.25),
+    intercityTransport: sum.intercityTransport + day.travelCost,
+    entryFees: sum.entryFees + day.entryCost
+  }), { stay: 0, food: 0, localTransport: 0, intercityTransport: 0, entryFees: 0 });
+  return {
+    id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    startingPoint: start, durationDays: duration, travelStyle: style,
+    originApproximate: !isKnownStartingPoint(start),
+    budgetTier: budget, createdAt: new Date().toISOString(), schedule: days,
+    budgetBreakdown: totals,
+    totalBudget: Object.values(totals).reduce((sum, amount) => sum + amount, 0)
+  };
+}
 
-// ─── FAVOURITE TOGGLE ────────────────────────────────────────────────────────
-const favBtns = document.querySelectorAll(".dest-card-fav");
-favBtns.forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevent card click events
-    const wasSaved = btn.classList.toggle("saved");
-    const card = btn.closest(".dest-card");
-    const title = card ? card.querySelector(".dest-card-title").textContent.trim() : "Destination";
-    showToast(wasSaved
-      ? `❤️ Added "${title}" to favourites!`
-      : `Removed "${title}" from favourites.`
-    );
+function renderItinerary(itinerary) {
+  document.getElementById("itinerary-title").textContent =
+    `${itinerary.durationDays}-day ${itinerary.travelStyle} journey`;
+  document.getElementById("itinerary-summary").textContent =
+    `Starting from ${itinerary.startingPoint} · ${itinerary.schedule.length} stops · ${itinerary.budgetTier} estimate`
+      + (itinerary.originApproximate ? " · Unknown starting place estimated from Bhubaneswar" : "");
+  const dayList = document.getElementById("itinerary-days");
+  dayList.replaceChildren();
+  itinerary.schedule.forEach(day => {
+    const card = document.createElement("article");
+    card.className = "itinerary-day";
+    card.innerHTML = `
+      <div class="itinerary-day-heading"><span>Day ${day.day}</span><div><h4>${escapeHTML(day.destination)}</h4><p>${escapeHTML(day.district)} district</p></div></div>
+      <p class="itinerary-travel"><i data-lucide="route" aria-hidden="true"></i> From ${escapeHTML(day.travelFrom)} · approx. ${day.travelDistanceKm} km / ${day.travelTimeHours} hr by road</p>
+      <div class="day-activities">
+        <p><strong>Morning</strong>${escapeHTML(day.morning)}</p>
+        <p><strong>Afternoon</strong>${escapeHTML(day.afternoon)}</p>
+        <p><strong>Evening</strong>${escapeHTML(day.evening)}</p>
+      </div>
+      <p class="day-food"><strong>Local food:</strong> ${day.food.map(escapeHTML).join(" · ")}</p>`;
+    card.insertAdjacentHTML("beforeend", `<p class="day-cost"><strong>Day estimate:</strong> ₹${day.totalDayCost.toLocaleString("en-IN")} (stay, food, local and intercity transport, entry allowance)</p>`);
+    dayList.appendChild(card);
   });
-});
+  const totals = itinerary.budgetBreakdown;
+  document.getElementById("itinerary-budget").innerHTML = `
+    <h4>Estimated total: ₹${itinerary.totalBudget.toLocaleString("en-IN")} / traveller</h4>
+    <dl>${[
+      ["Stay", totals.stay], ["Food", totals.food], ["Local transport", totals.localTransport],
+      ["Between destinations", totals.intercityTransport], ["Entry allowances", totals.entryFees]
+    ].map(([label, amount]) => `<div><dt>${label}</dt><dd>₹${amount.toLocaleString("en-IN")}</dd></div>`).join("")}</dl>`;
+  itineraryResult.hidden = false;
+  refreshIcons();
+}
 
-// ─── STYLE CHIPS (trip planner) ──────────────────────────────────────────────
-const styleChips = document.querySelectorAll(".style-chip");
-styleChips.forEach(chip => {
-  chip.addEventListener("click", () => chip.classList.toggle("active"));
-});
+async function persistItinerary(itinerary) {
+  const saved = readStoredList("odisha360:itineraries");
+  const withoutDuplicate = saved.filter(item => item.id !== itinerary.id);
+  if (!writeStoredList("odisha360:itineraries", [itinerary, ...withoutDuplicate].slice(0, 50))) {
+    plannerStatus.textContent = "Your itinerary is displayed, but this browser could not save it.";
+    plannerStatus.hidden = false;
+    return false;
+  }
+  plannerStatus.textContent = "Itinerary generated and saved on this device.";
+  plannerStatus.hidden = false;
+  if (!supabaseClient) return true;
+  try {
+    const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+    if (sessionError) throw sessionError;
+    const userId = sessionData.session?.user?.id;
+    if (!userId) return true;
+    const { error } = await supabaseClient.from("itineraries").upsert({
+      client_id: itinerary.id,
+      user_id: userId,
+      starting_point: itinerary.startingPoint,
+      duration_days: itinerary.durationDays,
+      travel_style: itinerary.travelStyle,
+      budget_tier: itinerary.budgetTier,
+      total_calculated_budget: itinerary.totalBudget,
+      schedule: itinerary.schedule
+    }, { onConflict: "user_id,client_id" });
+    if (error) throw error;
+    plannerStatus.textContent = "Itinerary saved on this device and synced to your account.";
+    return true;
+  } catch (error) {
+    console.error("Could not sync the itinerary with Supabase:", error);
+    plannerStatus.textContent = "Itinerary saved on this device. Cloud sync failed; you can retry with Save.";
+    return false;
+  }
+}
 
-// ─── PLANNER FORM ────────────────────────────────────────────────────────────
-function handlePlannerForm(e) {
-  e.preventDefault();
+plannerForm?.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!plannerForm.reportValidity()) return;
   const start = document.getElementById("trip-start").value.trim();
-  const duration = document.getElementById("trip-duration").value;
+  const duration = Number(document.getElementById("trip-duration").value);
+  const style = document.getElementById("trip-style").value;
   const budget = document.getElementById("trip-budget").value;
-  const styles = [...document.querySelectorAll(".style-chip.active")]
-    .map(c => c.dataset.style)
-    .join(", ");
+  if (start.length < 2 || start.length > 120 || !Number.isInteger(duration)
+    || duration < 1 || duration > 14 || !["budget", "mid", "luxury"].includes(budget)) {
+    plannerStatus.textContent = "Enter a starting place, select 1–14 days, a travel style and a budget.";
+    plannerStatus.hidden = false;
+    return;
+  }
+  const button = document.getElementById("btn-generate-plan");
+  try {
+    localStorage.setItem("odisha360:last-inputs", JSON.stringify({
+      start, duration, style, budget,
+      preferences: [...(document.getElementById("trip-preferences")?.selectedOptions || [])].map(option => option.value)
+    }));
+  } catch (error) { console.warn("Could not remember planner inputs:", error); }
+  button.disabled = true;
+  button.setAttribute("aria-busy", "true");
+  plannerStatus.textContent = "Building your route and estimating costs…";
+  plannerStatus.hidden = false;
+  itineraryResult.hidden = true;
+  try {
+    currentItinerary = buildItinerary({ start, duration, style, budget });
+    renderItinerary(currentItinerary);
+    await persistItinerary(currentItinerary);
+    itineraryResult.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (error) {
+    console.error("Could not build the itinerary:", error);
+    plannerStatus.textContent = "We couldn't build this route. Check the form and try again.";
+  } finally {
+    button.disabled = false;
+    button.removeAttribute("aria-busy");
+  }
+});
 
-  if (!start) {
-    showToast("Please enter your starting city or district!");
-    return;
-  }
-  if (!duration) {
-    showToast("Please select your trip duration!");
-    return;
-  }
-  const budgetLabel = budget === "budget" ? "Budget" : budget === "mid" ? "Mid-Range" : budget === "luxury" ? "Premium" : "Custom";
-  showToast(`✈️ Building your ${duration}-day ${styles || "custom"} ${budgetLabel} Odisha itinerary from ${start}...`);
+document.getElementById("save-itinerary")?.addEventListener("click", async () => {
+  if (!currentItinerary) return;
+  const synced = await persistItinerary(currentItinerary);
+  showToast(synced ? "Itinerary saved." : "Itinerary saved locally; cloud sync can be retried.");
+});
+document.getElementById("print-itinerary")?.addEventListener("click", () => window.print());
+
+function renderCultureDetails(topic) {
+  const article = document.createElement("article");
+  article.className = "modal-article culture-article";
+  article.innerHTML = `
+    <p class="section-tag">Odisha's living heritage</p>
+    <h2 id="modal-title">${escapeHTML(topic.title)}</h2>
+    <div class="culture-gallery">${topic.images.slice(0, 3).map((src, index) => `
+      <img src="${escapeHTML(src)}" loading="lazy"
+        alt="Odisha destination image ${index + 1}, shown as regional context for ${escapeHTML(topic.title)}" />`).join("")}</div>
+    <h3>History</h3><p>${escapeHTML(topic.history)}</p>
+    <h3>Why it matters</h3><p>${escapeHTML(topic.significance)}</p>
+    <h3>Where to experience it</h3><p>${escapeHTML(topic.experience)}</p>
+    <p class="best-time"><strong>Best time:</strong> ${escapeHTML(topic.bestTime)}</p>`;
+  showModal(article);
+}
+
+cultureGrid?.addEventListener("click", event => {
+  const button = event.target.closest("[data-culture-details]");
+  const topic = cultureTopics.find(item => item.id === button?.dataset.cultureDetails);
+  if (topic) renderCultureDetails(topic);
+});
+
+function openCultureDetails(id) {
+  const topic = cultureTopics.find(item => item.id === id);
+  if (topic) renderCultureDetails(topic);
 }
 
 // ─── TESTIMONIALS CAROUSEL ───────────────────────────────────────────────────
@@ -285,8 +762,14 @@ function goToTestimonial(idx) {
   const visible = getVisibleCount();
   const maxIdx = Math.max(0, testimonialCards.length - visible);
   currentTestimonial = Math.max(0, Math.min(idx, maxIdx));
-  testimonialTrack.style.transform = `translateX(-${currentTestimonial * getCardWidth()}px)`;
-  tDots.forEach((dot, i) => dot.classList.toggle("active", i === currentTestimonial));
+  if (testimonialTrack) {
+    testimonialTrack.style.transform = `translateX(-${currentTestimonial * getCardWidth()}px)`;
+  }
+  tDots.forEach((dot, i) => {
+    dot.hidden = i > maxIdx;
+    dot.classList.toggle("active", i === currentTestimonial);
+    dot.setAttribute("aria-current", String(i === currentTestimonial));
+  });
 }
 
 if (tNavNext) {
@@ -360,20 +843,17 @@ window.addEventListener("resize", () => {
 // ─── NEWSLETTER ───────────────────────────────────────────────────────────────
 function handleNewsletter(e) {
   e.preventDefault();
-  const email = document.getElementById("newsletter-email").value.trim();
-  if (!email) return;
-  const name = email.split("@")[0];
-  showToast(`🎉 Subscribed! Welcome to Odisha 360, ${name}!`);
-  e.target.reset();
+  showToast(supabaseClient
+    ? "Supabase is initialized, but newsletter storage has not been configured."
+    : "Newsletter signup is unavailable because Supabase is not configured.");
 }
 
 // ─── CONTACT FORM ────────────────────────────────────────────────────────────
 function handleContact(e) {
   e.preventDefault();
-  const name = document.getElementById("contact-name").value.trim();
-  if (!name) return;
-  showToast(`✅ Thank you, ${name}! We will get back to you within 24 hours.`);
-  e.target.reset();
+  showToast(supabaseClient
+    ? "Supabase is initialized, but contact-message storage has not been configured."
+    : "Contact form submission is unavailable because Supabase is not configured.");
 }
 
 // ─── BACK TO TOP ─────────────────────────────────────────────────────────────
@@ -454,3 +934,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 updateActiveNavLink();
+
+const authButtons = document.querySelectorAll(".auth-button");
+let activeAuthSession = null;
+
+function updateAuthButtons(session) {
+  activeAuthSession = session;
+  const user = session?.user;
+
+  authButtons.forEach(button => {
+    button.textContent = user ? "My profile" : "Continue with Google";
+    button.setAttribute("aria-label", user ? "Open your profile" : "Sign in with Google");
+  });
+}
+
+async function handleUniversalGoogleLogin() {
+  if (!supabaseClient) {
+    showToast("Google sign-in is unavailable because Supabase is not configured.");
+    return;
+  }
+
+  if (activeAuthSession) {
+    window.location.assign("dashboard.html");
+    return;
+  }
+
+  window.location.assign("login.html");
+}
+
+authButtons.forEach(button => {
+  button.addEventListener("click", handleUniversalGoogleLogin);
+});
+
+if (supabaseClient) {
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    updateAuthButtons(session);
+  });
+}
