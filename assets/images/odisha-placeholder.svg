@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title description">
+  <title id="title">Illustrated Odisha landscape</title>
+  <desc id="description">A green hillside, river and warm sunset used when a destination photograph is not available.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#f2d89e"/>
+      <stop offset="1" stop-color="#f5f7f3"/>
+    </linearGradient>
+    <linearGradient id="hill" x2="0" y2="1">
+      <stop stop-color="#49856a"/>
+      <stop offset="1" stop-color="#174c35"/>
+    </linearGradient>
+    <linearGradient id="water" x2="0" y2="1">
+      <stop stop-color="#6ca9a0"/>
+      <stop offset="1" stop-color="#2c7165"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1200v800H0z"/>
+  <circle cx="920" cy="180" r="76" fill="#d5a746" opacity=".8"/>
+  <path fill="#90aa86" d="M0 425 180 260l150 125 205-210 220 230 180-175 265 220v350H0z"/>
+  <path fill="url(#hill)" d="m0 480 210-125 173 116 211-180 232 178 165-103 209 110v324H0z"/>
+  <path fill="url(#water)" d="M0 610c205-88 330 65 520-4s311-2 680-93v287H0z"/>
+  <path fill="none" stroke="#f4d88e" stroke-width="8" opacity=".75" d="M0 670c205-88 330 65 520-4s311-2 680-93"/>
+  <path fill="#f3e5bd" opacity=".9" d="M120 746c180-40 300 18 452-22m68 16c155-32 286 2 441-40" fill="none" stroke="#f3e5bd" stroke-width="8"/>
+</svg>

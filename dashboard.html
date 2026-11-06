@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#174C35" />
+  <meta name="description" content="Your Odisha 360 account profile." />
+  <title>Your profile | Odisha 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <header class="auth-header">
+      <a class="auth-brand" href="index.html">
+        <span class="auth-brand-mark" aria-hidden="true">360</span>
+        <span>Odisha 360</span>
+      </a>
+    </header>
+
+    <main class="auth-main">
+      <section class="auth-card profile-card" id="dashboard-profile" aria-labelledby="profile-title" hidden>
+        <div class="profile-heading">
+          <p class="auth-eyebrow">Account</p>
+          <h1 class="auth-title" id="profile-title">Your profile</h1>
+        </div>
+        <div class="profile-identity">
+          <img class="profile-avatar" id="profile-avatar" alt="" referrerpolicy="no-referrer" hidden />
+          <span class="profile-avatar-fallback" id="profile-avatar-fallback" aria-hidden="true">?</span>
+          <div>
+            <h2 class="profile-name" id="profile-name">Loading profile…</h2>
+            <p class="profile-email" id="profile-email"></p>
+          </div>
+        </div>
+        <dl class="profile-details">
+          <div>
+            <dt>Google account ID</dt>
+            <dd id="profile-google-id">Loading…</dd>
+          </div>
+        </dl>
+        <section class="account-saved" aria-labelledby="saved-itineraries-title">
+          <h2 id="saved-itineraries-title">Saved itineraries</h2>
+          <p class="account-list-status" id="itineraries-status" role="status">Loading your saved trips…</p>
+          <ul id="account-itineraries"></ul>
+        </section>
+        <section class="account-saved" aria-labelledby="saved-favourites-title">
+          <h2 id="saved-favourites-title">Favourite destinations</h2>
+          <ul id="account-favourites"></ul>
+        </section>
+        <p class="auth-error" id="login-status" role="alert" hidden></p>
+        <button class="google-button" id="sign-out-button" type="button">Sign out</button>
+        <a class="auth-secondary" href="index.html">Return to Odisha 360</a>
+      </section>
+    </main>
+
+    <footer class="auth-footer">
+      <span>© 2026 Odisha 360</span>
+      <a href="index.html">Back to home</a>
+    </footer>
+  </div>
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth.js"></script>
+  <script src="auth-pages.js"></script>
+</body>
+</html>
